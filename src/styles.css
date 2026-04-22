@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+﻿/* LogiXpress â€” Angular styles.css minimal
+   Tous les CSS du template sont dans index.html */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; overflow-x: hidden; }
