@@ -1,38 +1,40 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { TranslationService, LANGUAGES, Language, LangCode } from '../services/translation/translation.service';
+import { TranslatePipe } from '../services/translation/translate.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   template: `
     <div id="wrapper">
       <a href="#" id="back-to-top"></a>
-
-      <!-- page preloader -->
       <div id="de-loader"></div>
 
-      <!-- header begin -->
+      <!-- ═══════════ HEADER ═══════════ -->
       <header class="transparent scroll-light">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="de-flex sm-pt10">
+
+                <!-- LOGO -->
                 <div class="de-flex-col">
                   <div id="logo">
                     <a href="/">
-                      <img class="logo-main"   src="assets/images/logo.png" alt="">
-                      <img class="logo-scroll" src="assets/images/logo.png"  alt="">
-                      <img class="logo-mobile" src="assets/images/logo.png" alt="">
-<!--                      <img class="logo-main"   src="assets/images/logo-white.webp" alt="">-->
-<!--                      <img class="logo-scroll" src="assets/images/logo-dark.webp"  alt="">-->
-<!--                      <img class="logo-mobile" src="assets/images/logo-white.webp" alt="">-->
+                      <img class="logo-main"   src="assets/images/logo.png" alt="LogiXpress">
+                      <img class="logo-scroll" src="assets/images/logo.png" alt="LogiXpress">
+                      <img class="logo-mobile" src="assets/images/logo.png" alt="LogiXpress">
                     </a>
                   </div>
                 </div>
+
+                <!-- MENU PRINCIPAL -->
                 <div class="de-flex-col header-col-mid">
                   <ul id="mainmenu">
-                    <li><a class="menu-item" href="/">Home</a>
+                    <li><a class="menu-item" href="/">{{ 'nav.home' | translate }}</a>
                       <ul class="mega">
                         <li>
                           <div class="container">
@@ -74,34 +76,70 @@ import { CommonModule } from '@angular/common';
                         </li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="/services">Services</a>
+
+                    <li><a class="menu-item" href="/services">{{ 'nav.services' | translate }}</a>
                       <ul>
-                        <li><a href="/services">Services</a></li>
-                        <li><a href="/service-single">Service Single</a></li>
+                        <li><a href="/services">{{ 'nav.services' | translate }}</a></li>
+                        <li><a href="/service-single">{{ 'nav.serviceSingle' | translate }}</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="#">Company</a>
+
+                    <li><a class="menu-item" href="#">{{ 'nav.company' | translate }}</a>
                       <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/team">Our Team</a></li>
-                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/about">{{ 'nav.about' | translate }}</a></li>
+                        <li><a href="/team">{{ 'nav.team' | translate }}</a></li>
+                        <li><a href="/careers">{{ 'nav.careers' | translate }}</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="#">Pages</a>
+
+                    <li><a class="menu-item" href="#">{{ 'nav.pages' | translate }}</a>
                       <ul>
-                        <li><a href="/track">Track Your Package</a></li>
-                        <li><a href="/booking">Book Shipment</a></li>
-                        <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/testimonials">Testimonials</a></li>
+                        <li><a href="/track">{{ 'nav.track' | translate }}</a></li>
+                        <li><a href="/booking">{{ 'nav.booking' | translate }}</a></li>
+                        <li><a href="/faq">{{ 'nav.faq' | translate }}</a></li>
+                        <li><a href="/testimonials">{{ 'nav.testimonials' | translate }}</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="/blog">Blog</a></li>
-                    <li><a class="menu-item" href="/contact">Contact</a></li>
+
+                    <li><a class="menu-item" href="/blog">{{ 'nav.blog' | translate }}</a></li>
+                    <li><a class="menu-item" href="/contact">{{ 'nav.contact' | translate }}</a></li>
                   </ul>
                 </div>
+
+                <!-- DROITE : Book Shipment + SÉLECTEUR LANGUE -->
                 <div class="de-flex-col">
-                  <div class="menu_side_area">
-                    <a href="/booking" class="btn-main fx-slide"><span>Book Shipment</span></a>
+                  <div class="menu_side_area d-flex align-items-center gap-3">
+
+                    <!-- ▼ ICÔNE SÉLECTEUR DE LANGUE ▼ -->
+                    <div class="lp-lang-selector" [class.open]="langMenuOpen">
+                      <button class="lp-lang-btn" (click)="toggleLangMenu($event)" aria-label="Select language">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                          <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM9.71002 19.6674C8.74743 17.6259 8.15732 15.3742 8.02731 13H4.06189C4.458 16.1765 6.71639 18.7747 9.71002 19.6674ZM10.0307 13C10.1811 15.4388 10.8778 17.7297 12 19.752C13.1222 17.7297 13.8189 15.4388 13.9693 13H10.0307ZM19.9381 13H15.9727C15.8427 15.3742 15.2526 17.6259 14.29 19.6674C17.2836 18.7747 19.542 16.1765 19.9381 13ZM4.06189 11H8.02731C8.15732 8.62577 8.74743 6.37407 9.71002 4.33256C6.71639 5.22533 4.458 7.8235 4.06189 11ZM10.0307 11H13.9693C13.8189 8.56122 13.1222 6.27025 12 4.24799C10.8778 6.27025 10.1811 8.56122 10.0307 11ZM14.29 4.33256C15.2526 6.37407 15.8427 8.62577 15.9727 11H19.9381C19.542 7.8235 17.2836 5.22533 14.29 4.33256Z"/>
+                        </svg>
+                        <span class="lp-lang-current">{{ currentLang.flag }} {{ currentLang.code.toUpperCase() }}</span>
+                        <svg class="lp-lang-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="12" height="12">
+                          <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"/>
+                        </svg>
+                      </button>
+
+                      <!-- Dropdown liste des langues -->
+                      <div class="lp-lang-dropdown" *ngIf="langMenuOpen">
+                        <div class="lp-lang-list">
+                          <button
+                            *ngFor="let lang of languages"
+                            class="lp-lang-item"
+                            [class.active]="lang.code === currentLang.code"
+                            (click)="selectLanguage(lang.code)">
+                            <span class="lp-lang-flag">{{ lang.flag }}</span>
+                            <span class="lp-lang-label">{{ lang.label }}</span>
+                            <span class="lp-lang-label-en">{{ lang.labelEn }}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ▲ FIN SÉLECTEUR LANGUE ▲ -->
+
+                    <a href="/booking" class="btn-main fx-slide"><span>{{ 'nav.bookShipment' | translate }}</span></a>
                     <span id="menu-btn"></span>
                   </div>
                   <div id="btn-extra">
@@ -109,6 +147,7 @@ import { CommonModule } from '@angular/common';
                     <span></span>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -118,7 +157,6 @@ import { CommonModule } from '@angular/common';
 
       <!-- content begin -->
       <div class="no-bottom no-top" id="content">
-
         <div id="top"></div>
 
         <!-- ===== HERO SLIDER ===== -->
@@ -135,14 +173,16 @@ import { CommonModule } from '@angular/common';
                         <div class="row gx-5 align-items-center justify-content-center text-center">
                           <div class="col-lg-10">
                             <div class="sw-text-wrapper">
-                              <h1 class="animated text-uppercase anim-order-1">Global Ship Freight with Trusted Shipping</h1>
+                              <h1 class="animated text-uppercase anim-order-1">{{ 'hero.slide1.title' | translate }}</h1>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="animated anim-order-2">
-                              <p>We work with reliable international carriers to ensure smooth cargo movement across major ports. Whether you need FCL, LCL, or fast transit service, we secure the best route and handle the logistics.</p>
+                              <p>{{ 'hero.slide1.desc' | translate }}</p>
                               <div class="spacer-half"></div>
-                              <a class="btn-main fx-slide animated fadeInUp anim-order-3" href="/booking"><span>Book Shipment</span></a>
+                              <a class="btn-main fx-slide animated fadeInUp anim-order-3" href="/booking">
+                                <span>{{ 'hero.slide1.cta' | translate }}</span>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -153,10 +193,10 @@ import { CommonModule } from '@angular/common';
                         <div class="row">
                           <div class="col-lg-12">
                             <div class="d-flex justify-content-between text-center">
-                              <div class="relative"><h6 class="mb-0">Reliable Global Coverage</h6></div>
-                              <div class="relative"><h6 class="mb-0">Flexible Cargo Options</h6></div>
-                              <div class="relative"><h6 class="mb-0">On-Time Delivery</h6></div>
-                              <div class="relative"><h6 class="mb-0">Cost-Effective Solutions</h6></div>
+                              <div class="relative"><h6 class="mb-0">{{ 'hero.tag1' | translate }}</h6></div>
+                              <div class="relative"><h6 class="mb-0">{{ 'hero.tag2' | translate }}</h6></div>
+                              <div class="relative"><h6 class="mb-0">{{ 'hero.tag3' | translate }}</h6></div>
+                              <div class="relative"><h6 class="mb-0">{{ 'hero.tag4' | translate }}</h6></div>
                             </div>
                           </div>
                         </div>
@@ -174,28 +214,43 @@ import { CommonModule } from '@angular/common';
                         <div class="row gx-5 align-items-center justify-content-center text-center">
                           <div class="col-lg-10">
                             <div class="sw-text-wrapper">
-                              <h1 class="animated text-uppercase anim-order-1">Efficient Container Shipping Across Borders</h1>
+                              <h1 class="animated text-uppercase anim-order-1">{{ 'hero.slide2.title' | translate }}</h1>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="animated anim-order-2">
-                              <p>From standard containers to specialized equipment, we handle diverse shipping needs with precision. Our global network ensures safe transport, clear documentation, and smooth port-to-port connections.</p>
+                              <p>{{ 'hero.slide2.desc' | translate }}</p>
                               <div class="spacer-half"></div>
-                              <a class="btn-main fx-slide animated fadeInUp anim-order-3" href="/booking"><span>Book Shipment</span></a>
+                              <a class="btn-main fx-slide animated fadeInUp anim-order-3" href="/booking">
+                                <span>{{ 'hero.slide2.cta' | translate }}</span>
+                              </a>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="abs w-100 bottom-0 z-2 pb-5 sm-hide">
+                    <div class="sw-overlay op-4"></div>
+                  </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                  <div class="swiper-inner" data-bgimage="url(assets/images/slider/b3.webp)">
+                    <div class="sw-caption">
                       <div class="container">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="d-flex justify-content-between text-center">
-                              <div class="relative"><h6 class="mb-0">Secure Cargo Handling</h6></div>
-                              <div class="relative"><h6 class="mb-0">Worldwide Port Access</h6></div>
-                              <div class="relative"><h6 class="mb-0">Specialized Equipment</h6></div>
-                              <div class="relative"><h6 class="mb-0">Trusted Documentation</h6></div>
+                        <div class="row gx-5 align-items-center justify-content-center text-center">
+                          <div class="col-lg-10">
+                            <div class="sw-text-wrapper">
+                              <h1 class="animated text-uppercase anim-order-1">{{ 'hero.slide3.title' | translate }}</h1>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="animated anim-order-2">
+                              <p>{{ 'hero.slide3.desc' | translate }}</p>
+                              <div class="spacer-half"></div>
+                              <a class="btn-main fx-slide animated fadeInUp anim-order-3" href="/booking">
+                                <span>{{ 'hero.slide3.cta' | translate }}</span>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -207,199 +262,26 @@ import { CommonModule } from '@angular/common';
 
               </div>
               <div class="swiper-pagination"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
             </div>
           </div>
         </section>
-        <!-- hero end -->
 
-        <!-- ===== ABOUT ===== -->
-        <section class="relative">
+        <!-- ===== SERVICES SECTION ===== -->
+        <section class="pt-80 pb-80">
           <div class="container">
             <div class="row">
-              <div class="col-lg-6">
-                <div class="subtitle s2 mb-3 wow fadeInUp" data-wow-delay=".0s">About Us</div>
-                <h2 class="split" data-wow-delay=".2s">Global Sea Cargo Logistics You Can Trust</h2>
-                <p class="wow fadeInUp" data-wow-delay=".6s">
-                  OceanLink Logistics delivers reliable, cost-effective, and timely sea freight solutions
-                  for businesses of all sizes. From full container loads to consolidated shipments,
-                  we connect U.S. ports like Long Beach, Houston, and Miami to international trade hubs
-                  across Asia, Europe, and the Middle East.
-                </p>
-                <div class="row g-4">
-                  <div class="col-md-5 wow fadeInUp" data-wow-delay=".8s">
-                    <ul class="ul-check text-dark">
-                      <li>Full Container Load</li>
-                      <li>Less than Container Load</li>
-                      <li>Breakbulk &amp; Project Cargo</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-5 wow fadeInUp" data-wow-delay=".8s">
-                    <ul class="ul-check text-dark">
-                      <li>Customs Brokerage</li>
-                      <li>Port-to-Door Delivery</li>
-                      <li>Real-Time Cargo Tracking</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <img src="assets/images/misc/c3.webp" class="w-100" alt="Sea Cargo Logistics Service">
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== COUNTERS ===== -->
-        <section class="pt-0">
-          <div class="container">
-            <div class="row g-4">
-              <div class="col-md-3 col-sm-6 text-center">
-                <div class="de_count wow fadeInRight" data-wow-delay=".0s">
-                  <h3 class="fs-40 mb-0"><span class="timer" data-to="65250" data-speed="3000">0</span>+</h3>
-                  Containers Shipped
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 text-center">
-                <div class="de_count wow fadeInRight" data-wow-delay=".2s">
-                  <h3 class="fs-40 mb-0"><span class="timer" data-to="23160" data-speed="3000">0</span>+</h3>
-                  Satisfied Clients
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 text-center">
-                <div class="de_count wow fadeInRight" data-wow-delay=".4s">
-                  <h3 class="fs-40 mb-0"><span class="timer" data-to="150" data-speed="3000">0</span>+</h3>
-                  Global Shipping Partners
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 text-center">
-                <div class="de_count wow fadeInRight" data-wow-delay=".6s">
-                  <h3 class="fs-40 mb-0"><span class="timer" data-to="20" data-speed="3000">0</span>+</h3>
-                  Years of Experience
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== TRACKING ===== -->
-        <section class="p-0">
-          <div class="container-fluid relative z-1">
-            <div class="row g-0">
-              <div class="col-lg-6">
-                <div class="relative overflow-hidden">
-                  <img src="assets/images/misc/s5.webp" class="w-100 wow scaleIn" alt="">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="h-100 relative bg-dark p-5 text-light">
-                  <div class="subtitle wow fadeInUp" data-wow-delay=".2s">Track Your Package</div>
-                  <h2 class="split" data-wow-delay=".4s">Quick Tracking</h2>
-                  <div class="row align-items-center justify-content-end">
-                    <div class="col-md-9 col-sm-8">
-                      <div class="hover-underline">
-                        <input class="form-underline mb-0 no-border fs-18" id="order_id" name="order_id"
-                               placeholder="enter your order number here..." type="text">
-                      </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4">
-                      <a class="btn-main bg-white text-dark fx-slide w-100" href="/track"><span>Track It</span></a>
-                    </div>
-                  </div>
-                  <img src="assets/images/misc/c2.webp" class="w-50 abs bottom-0 end-0 wow scaleIn" data-wow-duration="2s" alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== SERVICES ===== -->
-        <section class="overflow-hidden">
-          <div class="container">
-            <div class="row mb-3 g-4 align-items-center justify-content-between">
-              <div class="col-lg-6">
-                <div class="uptitle id-color wow fadeInUp">Our Services</div>
-                <h2 class="split">Services Tailored to You</h2>
-                <p>Offering expert project management, innovative design, renovations, and sustainable building services, LogiXpress delivers quality.</p>
-              </div>
-              <div class="col-lg-6">
-                <div class="relative">
-                  <div class="de-custom-nav d-flex flex-end" data-target="#services-carousel">
-                    <div class="d-prev circle"></div>
-                    <div class="d-next circle"></div>
-                  </div>
-                </div>
-              </div>
-              <div id="services-carousel" class="owl-4-cols owl-carousel owl-theme">
-                <div class="item">
-                  <a href="/service-single" class="d-block hover relative">
-                    <img src="assets/images/icons-color/1.png" class="w-70px mb-3 hover-jello infinite" alt="">
-                    <h4>Trucking</h4>
-                    <p>Reliable ground transportation for shipments across the United States with flexible fleet options.</p>
-                  </a>
-                </div>
-                <div class="item">
-                  <a href="/service-single" class="d-block hover relative">
-                    <img src="assets/images/icons-color/2.png" class="w-70px mb-3 hover-jello infinite" alt="">
-                    <h4>Air Freight</h4>
-                    <p>Fast delivery of time-sensitive cargo using global air routes with real-time tracking.</p>
-                  </a>
-                </div>
-                <div class="item">
-                  <a href="/service-single" class="d-block hover relative">
-                    <img src="assets/images/icons-color/3.png" class="w-70px mb-3 hover-jello infinite" alt="">
-                    <h4>Ship Freight</h4>
-                    <p>Cost-effective shipping solution for bulk cargo with dependable international sea freight services.</p>
-                  </a>
-                </div>
-                <div class="item">
-                  <a href="/service-single" class="d-block hover relative">
-                    <img src="assets/images/icons-color/4.png" class="w-70px mb-3 hover-jello infinite" alt="">
-                    <h4>Rail Freight</h4>
-                    <p>Efficient and eco-friendly rail transport option ideal for long-distance heavy shipments.</p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== VIDEO ===== -->
-        <section aria-label="section" class="relative p-0 overflow-hidden">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-12">
-                <a class="d-block hover popup-youtube" href="https://www.youtube.com/watch?v=FikkQTfbaOs">
-                  <div class="relative overflow-hidden">
-                    <div class="absolute start-0 w-100 abs-middle fs-36 text-white text-center z-2">
-                      <div class="player bg-dark border-0 circle wow scaleIn"><span></span></div>
-                    </div>
-                    <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
-                    <img src="assets/images/background/2.webp" class="w-100 hover-scale-1-1" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== WHY CHOOSE US ===== -->
-        <section class="bg-dark text-light">
-          <div class="container">
-            <div class="row g-4 justify-content-center">
-              <div class="col-lg-7 text-center">
-                <div class="subtitle wow fadeInUp">Why Choose Us</div>
-                <h2 class="split" data-wow-delay=".2s">Trusted Logistics Partner for Worldwide Shipping</h2>
+              <div class="col-md-12 text-center mb-50">
+                <div class="subtitle">{{ 'services.subtitle' | translate }}</div>
+                <h2>{{ 'services.title' | translate }}</h2>
               </div>
             </div>
             <div class="row g-4">
-              <div class="col-lg-4 col-md-6 wow fadeInUp" *ngFor="let item of whyUs">
-                <div class="relative">
-                  <i class="abs fs-24 p-4 bg-color icon_check rounded-1 text-light"></i>
-                  <div class="ps-100">
-                    <h4>{{ item.title }}</h4>
-                    <p>{{ item.desc }}</p>
+              <div class="col-lg-3 col-md-6" *ngFor="let svc of servicesData()">
+                <div class="f-box f-icon-left">
+                  <i class="icofont-truck-alt"></i>
+                  <div class="fb-text">
+                    <h4>{{ svc.titleKey | translate }}</h4>
+                    <p>{{ svc.descKey | translate }}</p>
                   </div>
                 </div>
               </div>
@@ -407,54 +289,37 @@ import { CommonModule } from '@angular/common';
           </div>
         </section>
 
-        <!-- ===== CTA ===== -->
-        <section>
-          <div class="container relative z-1">
-            <div class="row g-4 gx-5">
-              <div class="col-lg-6">
-                <div class="h-100 relative">
-                  <div class="subtitle id-color wow fadeInUp" data-wow-delay=".2s">Your Trusted Shipping Partner</div>
-                  <h1 class="split" data-wow-delay=".4s">Expert Ship Freight Services, Deliver Worldwide with Ease</h1>
-                  <div class="abs ol-lg-12 pos-sm-relative bottom-0">
-                    <div class="d-flex align-items-center justify-content-between border-bottom pb-4 mb-4 wow fadeInUp" data-wow-delay=".9s">
-                      <a class="btn-main fx-slide me-5" href="/booking"><span>Get Started Now</span></a>
-                      <div class="d-flex align-items-center">
-                        <div class="me-4">
-                          <img src="assets/images/testimonial/1.webp" class="w-50px circle ms-min-10" alt="">
-                          <img src="assets/images/testimonial/2.webp" class="w-50px circle ms-min-10" alt="">
-                          <img src="assets/images/testimonial/3.webp" class="w-50px circle ms-min-10" alt="">
-                        </div>
-                        <div class="fw-600 fs-14 lh-1-5"><span class="fs-16 fw-bold text-dark">23k</span><br>successful shipments</div>
-                      </div>
-                    </div>
-                    <p>We specialize in global ocean freight solutions, offering full container load, less than container load, and bulk cargo shipping. With our trusted carrier network and years of expertise, we guarantee smooth operations, reliable schedules, and cost-effective delivery for businesses of all sizes.</p>
-                  </div>
-                </div>
+        <!-- ===== WHY US ===== -->
+        <section class="bg-grey pt-80 pb-80">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center mb-50">
+                <div class="subtitle">{{ 'whyUs.subtitle' | translate }}</div>
+                <h2>{{ 'whyUs.title' | translate }}</h2>
               </div>
-              <div class="col-lg-6">
-                <div class="relative">
-                  <div class="abs bottom-0 end-0 m-5">
-                    <div class="p-4 mb-4 bg-color text-light rounded-1 text-center wow fadeInUp" data-wow-delay=".0s">
-                      <h1 class="fs-84 mb-1">15</h1>
-                      <div class="fs-16 lh-1-5">Years of Excellence</div>
-                    </div>
-                  </div>
-                  <img src="assets/images/misc/s3.webp" class="w-100 rounded-1" alt="">
+            </div>
+            <div class="row g-4">
+              <div class="col-lg-4 col-md-6" *ngFor="let item of whyUsData()">
+                <div class="de-step">
+                  <h4>{{ item.titleKey | translate }}</h4>
+                  <p>{{ item.descKey | translate }}</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- ===== BOTTOM CTA BANNER ===== -->
+        <!-- ===== BOTTOM CTA ===== -->
         <section class="bg-color text-light pt-50 pb-50">
           <div class="container">
             <div class="row g-4">
               <div class="col-md-9">
-                <h3 class="mb-0 fs-32 split">Ready to Ship Your Cargo Worldwide?</h3>
+                <h3 class="mb-0 fs-32 split">{{ 'cta.title' | translate }}</h3>
               </div>
               <div class="col-lg-3 text-lg-end">
-                <a class="btn-main fx-slide btn-line wow fadeInRight" data-wow-delay=".2s" href="/booking"><span>Book Shipment</span></a>
+                <a class="btn-main fx-slide btn-line wow fadeInRight" href="/booking">
+                  <span>{{ 'cta.btn' | translate }}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -463,7 +328,7 @@ import { CommonModule } from '@angular/common';
       </div>
       <!-- content end -->
 
-      <!-- footer begin -->
+      <!-- ═══════════ FOOTER ═══════════ -->
       <footer class="text-light section-dark">
         <div class="container">
           <div class="row g-4 justify-content-between">
@@ -473,27 +338,27 @@ import { CommonModule } from '@angular/common';
               <div class="row g-4">
                 <div class="col-md-6">
                   <div class="widget">
-                    <h5>Services</h5>
+                    <h5>{{ 'footer.services' | translate }}</h5>
                     <ul>
-                      <li><a href="/service-single">Trucking</a></li>
-                      <li><a href="/service-single">Air Freight</a></li>
-                      <li><a href="/service-single">Ship Freight</a></li>
-                      <li><a href="/service-single">Rail Freight</a></li>
-                      <li><a href="/service-single">Warehousing</a></li>
-                      <li><a href="/service-single">Customs Brokerage</a></li>
+                      <li><a href="/service-single">{{ 'services.trucking' | translate }}</a></li>
+                      <li><a href="/service-single">{{ 'services.airFreight' | translate }}</a></li>
+                      <li><a href="/service-single">{{ 'services.shipFreight' | translate }}</a></li>
+                      <li><a href="/service-single">{{ 'services.railFreight' | translate }}</a></li>
+                      <li><a href="/service-single">{{ 'services.warehousing' | translate }}</a></li>
+                      <li><a href="/service-single">{{ 'services.customs' | translate }}</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="widget">
-                    <h5>Company</h5>
+                    <h5>{{ 'footer.company' | translate }}</h5>
                     <ul>
-                      <li><a href="/">Home</a></li>
-                      <li><a href="/about">About Us</a></li>
-                      <li><a href="/team">Our Team</a></li>
-                      <li><a href="/careers">Careers</a></li>
-                      <li><a href="/blog">Blog</a></li>
-                      <li><a href="/contact">Contact</a></li>
+                      <li><a href="/">{{ 'nav.home' | translate }}</a></li>
+                      <li><a href="/about">{{ 'nav.about' | translate }}</a></li>
+                      <li><a href="/team">{{ 'nav.team' | translate }}</a></li>
+                      <li><a href="/careers">{{ 'nav.careers' | translate }}</a></li>
+                      <li><a href="/blog">{{ 'nav.blog' | translate }}</a></li>
+                      <li><a href="/contact">{{ 'nav.contact' | translate }}</a></li>
                     </ul>
                   </div>
                 </div>
@@ -508,19 +373,18 @@ import { CommonModule } from '@angular/common';
             </div>
             <div class="col-md-6">
               <div class="d-flex align-items-center justify-content-between">
-                <h2>Get in Touch</h2>
+                <h2>{{ 'footer.getInTouch' | translate }}</h2>
                 <img src="assets/images/ui/up-right-arrow.webp" class="w-60px op-5" alt="">
               </div>
               <div class="widget">
-                <div class="op-5 fs-15">Email</div>
+                <div class="op-5 fs-15">{{ 'footer.email' | translate }}</div>
                 <h3>contact&#64;logixpress.com</h3>
                 <div class="spacer-20"></div>
-                <div class="op-5 fs-15">Phone</div>
+                <div class="op-5 fs-15">{{ 'footer.phone' | translate }}</div>
                 <h3>+929 333 9296</h3>
                 <div class="spacer-20"></div>
-                <div class="op-5 fs-15">Office Location</div>
+                <div class="op-5 fs-15">{{ 'footer.office' | translate }}</div>
                 <h3>100 S Main St, New York, NY</h3>
-                <div class="spacer-20"></div>
               </div>
             </div>
           </div>
@@ -529,7 +393,7 @@ import { CommonModule } from '@angular/common';
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                Copyright {{ year }} LogiXpress by Designesia
+                {{ 'footer.copyright' | translate }} {{ year }} LogiXpress
               </div>
             </div>
           </div>
@@ -542,32 +406,29 @@ import { CommonModule } from '@angular/common';
 
     <!-- overlay content -->
     <div id="extra-wrap" class="text-light">
-      <div id="btn-close">
-        <span></span>
-        <span></span>
-      </div>
+      <div id="btn-close"><span></span><span></span></div>
       <div id="extra-content">
         <img src="assets/images/logo-white.webp" class="w-200px" alt="">
         <div class="spacer-30-line"></div>
-        <h5>Our Services</h5>
+        <h5>{{ 'offcanvas.ourServices' | translate }}</h5>
         <ul class="ul-check">
-          <li>Trucking</li>
-          <li>Air Freight</li>
-          <li>Ship Freight</li>
-          <li>Rail Freight</li>
-          <li>Warehousing</li>
-          <li>Customs Brokerage</li>
-          <li>Last-Mile Delivery</li>
-          <li>Project Cargo</li>
+          <li>{{ 'services.trucking' | translate }}</li>
+          <li>{{ 'services.airFreight' | translate }}</li>
+          <li>{{ 'services.shipFreight' | translate }}</li>
+          <li>{{ 'services.railFreight' | translate }}</li>
+          <li>{{ 'services.warehousing' | translate }}</li>
+          <li>{{ 'services.customs' | translate }}</li>
+          <li>{{ 'services.lastMile' | translate }}</li>
+          <li>{{ 'services.projectCargo' | translate }}</li>
         </ul>
         <div class="spacer-30-line"></div>
-        <h5>Contact Us</h5>
+        <h5>{{ 'offcanvas.contact' | translate }}</h5>
         <div><i class="icofont-phone me-2 op-5"></i>+929 333 9296</div>
         <div><i class="icofont-location-pin me-2 op-5"></i>100 S Main St, New York, NY</div>
         <div><i class="icofont-envelope me-2 op-5"></i>contact&#64;logixpress.com</div>
         <div class="spacer-30-line"></div>
-        <h5>About Us</h5>
-        <p>We are a trusted logistics and cargo solutions provider committed to delivering your goods safely, efficiently, and on time.</p>
+        <h5>{{ 'offcanvas.about' | translate }}</h5>
+        <p>{{ 'offcanvas.aboutDesc' | translate }}</p>
         <div class="social-icons">
           <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -577,200 +438,184 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
     </div>
-    <!-- overlay content end -->
-  `,
-  styles: [`
-    /* ============================================================
-       HERO SLIDER - IMAGE RESPONSIVE
-       ============================================================ */
 
-    /* Conteneur principal */
-    .mh-800 {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
+    <!-- CSS du sélecteur de langue (injecté dans le composant) -->
+    <style>
+      .lp-lang-selector { position: relative; }
 
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
-
-    .swiper-slide {
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* L'image de fond responsive */
-    .swiper-inner {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Overlay pour le texte */
-    .swiper-inner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
-      z-index: 1;
-    }
-
-    .sw-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 1;
-    }
-    .op-4 { opacity: 0.4; }
-
-    /* Contenu du slide */
-    .sw-caption {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      padding: 100px 20px;
-    }
-
-    .sw-text-wrapper h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      color: white;
-    }
-
-    .sw-text-wrapper p {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
-      max-width: 600px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    /* RESPONSIVE - Mobile */
-    @media (max-width: 768px) {
-      .mh-800 {
-        min-height: 80vh;
+      .lp-lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 6px;
+        color: #fff;
+        padding: 6px 10px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+        white-space: nowrap;
+      }
+      .lp-lang-btn:hover,
+      .lp-lang-selector.open .lp-lang-btn {
+        border-color: #f85c00;
+        background: rgba(248,92,0,0.1);
+      }
+      .lp-lang-chevron {
+        transition: transform 0.2s;
+      }
+      .lp-lang-selector.open .lp-lang-chevron {
+        transform: rotate(180deg);
       }
 
-      .swiper-inner {
-        min-height: 80vh;
-        background-position: 70% center !important;
+      .lp-lang-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 200px;
+        background: #1a2332;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 8px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        z-index: 9999;
+        overflow: hidden;
+        animation: langDropIn 0.2s ease;
+      }
+      @keyframes langDropIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to   { opacity: 1; transform: translateY(0); }
       }
 
-      .sw-caption {
-        padding: 60px 15px;
+      .lp-lang-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 6px;
+        gap: 2px;
       }
 
-      .sw-text-wrapper h1 {
-        font-size: 1.8rem;
+      .lp-lang-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        color: rgba(255,255,255,0.75);
+        font-size: 0.82rem;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s, color 0.15s;
+      }
+      .lp-lang-item:hover {
+        background: rgba(248,92,0,0.12);
+        color: #fff;
+      }
+      .lp-lang-item.active {
+        background: #f85c00;
+        color: #fff;
       }
 
-      .sw-text-wrapper p {
-        font-size: 0.85rem;
-        padding: 0 10px;
+      .lp-lang-flag { font-size: 1.1rem; }
+      .lp-lang-label { font-weight: 600; }
+      .lp-lang-label-en {
+        font-size: 0.72rem;
+        opacity: 0.6;
+        margin-left: auto;
       }
 
-      .sm-hide {
-        display: none !important;
+      /* Scroll header : adapter couleur du bouton langue */
+      header.sticky .lp-lang-btn {
+        border-color: rgba(0,0,0,0.2);
+        color: #111;
       }
-    }
-
-    /* RESPONSIVE - Très petits écrans */
-    @media (max-width: 480px) {
-      .mh-800 {
-        min-height: 70vh;
+      header.sticky .lp-lang-dropdown {
+        background: #fff;
+        border-color: #e5e7eb;
       }
+      header.sticky .lp-lang-item { color: #333; }
+      header.sticky .lp-lang-item:hover { background: #f5f5f5; color: #111; }
 
-      .swiper-inner {
-        min-height: 70vh;
-        background-position: 65% center !important;
-      }
-
-      .sw-caption {
-        padding: 40px 12px;
-      }
-
-      .sw-text-wrapper h1 {
-        font-size: 1.5rem;
-      }
-
-      .btn-main {
-        padding: 8px 20px;
-        font-size: 0.75rem;
-      }
-    }
-
-    /* RESPONSIVE - Tablettes */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .mh-800 {
-        min-height: 90vh;
-      }
-
-      .swiper-inner {
-        min-height: 90vh;
-      }
-
-      .sw-text-wrapper h1 {
-        font-size: 2.5rem;
-      }
-    }
-
-    /* Animation pour le texte */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animated {
-      animation-duration: 0.8s;
-      animation-fill-mode: both;
-    }
-
-    .fadeInUp {
-      animation-name: fadeInUp;
-    }
-
-    .anim-order-1 { animation-delay: 0.1s; }
-    .anim-order-2 { animation-delay: 0.3s; }
-    .anim-order-3 { animation-delay: 0.5s; }
-  `]
+    </style>
+  `
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   year = new Date().getFullYear();
+  languages = LANGUAGES;
+  currentLang!: Language;
+  langMenuOpen = false;
 
-  whyUs = [
-    { title: 'Experienced Logistics',       desc: 'Our specialists bring decades of experience in freight forwarding and customs clearance, ensuring smooth and efficient supply chain solutions worldwide.' },
-    { title: 'Fast Delivery Commitment',    desc: 'We understand the urgency of every shipment and act quickly. Optimized routes and tracking technology ensure timely deliveries without unnecessary delays.' },
-    { title: 'Transparent Pricing Policy',  desc: 'Our pricing is clear, competitive, and easy to understand for all clients. We guarantee no hidden charges and complete financial transparency every time.' },
-    { title: 'Reliable Cargo Handling',     desc: 'Every shipment is managed with precision and care to avoid risks. From packing to loading, we guarantee your cargo arrives safely and intact.' },
-    { title: 'Comprehensive Solutions',     desc: 'We cover every step of logistics including warehousing, distribution, and freight. Our integrated services make supply chain management simple and efficient.' },
-    { title: 'Satisfaction Guarantee',      desc: 'Your trust is our highest priority across all shipments. We back our services with responsive support and a strong customer satisfaction guarantee.' }
-  ];
+  private sub!: Subscription;
 
-  ngAfterViewInit() {
-    // Laisser designesia.js initialiser le menu et les animations
-    // Le setTimeout donne le temps au DOM de se stabiliser
+  constructor(
+    private ts: TranslationService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.sub = this.ts.lang$.subscribe(() => {
+      this.currentLang = this.ts.currentLanguage;
+      this.cdr.markForCheck();
+    });
+    this.currentLang = this.ts.currentLanguage;
+  }
+
+  ngAfterViewInit(): void {
+    // Ferme le menu langue si on clique ailleurs
+    document.addEventListener('click', this.closeOnOutside);
+
     setTimeout(() => {
-      // Re-trigger designesia init si disponible
       if (typeof (window as any).designesiaInit === 'function') {
         (window as any).designesiaInit();
       }
     }, 100);
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+    document.removeEventListener('click', this.closeOnOutside);
+  }
+
+  toggleLangMenu(e: Event): void {
+    e.stopPropagation();
+    this.langMenuOpen = !this.langMenuOpen;
+  }
+
+  selectLanguage(code: LangCode): void {
+    this.ts.loadLanguage(code);
+    this.langMenuOpen = false;
+  }
+
+  private closeOnOutside = (): void => {
+    this.langMenuOpen = false;
+    this.cdr.detectChanges();
+  };
+
+  /** Données services (clés i18n) */
+  servicesData() {
+    return [
+      { titleKey: 'services.trucking',     descKey: 'services.truckingDesc'     },
+      { titleKey: 'services.airFreight',   descKey: 'services.airFreightDesc'   },
+      { titleKey: 'services.shipFreight',  descKey: 'services.shipFreightDesc'  },
+      { titleKey: 'services.railFreight',  descKey: 'services.railFreightDesc'  },
+      { titleKey: 'services.warehousing',  descKey: 'services.warehousingDesc'  },
+      { titleKey: 'services.customs',      descKey: 'services.customsDesc'      },
+      { titleKey: 'services.lastMile',     descKey: 'services.lastMileDesc'     },
+      { titleKey: 'services.projectCargo', descKey: 'services.projectCargoDesc' },
+    ];
+  }
+
+  /** Données why us (clés i18n) */
+  whyUsData() {
+    return [
+      { titleKey: 'whyUs.item1Title', descKey: 'whyUs.item1Desc' },
+      { titleKey: 'whyUs.item2Title', descKey: 'whyUs.item2Desc' },
+      { titleKey: 'whyUs.item3Title', descKey: 'whyUs.item3Desc' },
+      { titleKey: 'whyUs.item4Title', descKey: 'whyUs.item4Desc' },
+      { titleKey: 'whyUs.item5Title', descKey: 'whyUs.item5Desc' },
+      { titleKey: 'whyUs.item6Title', descKey: 'whyUs.item6Desc' },
+    ];
   }
 }
