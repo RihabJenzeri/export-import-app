@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "services": "Dienstleistungen",
+    "serviceSingle": "Dienstleistungsdetail",
+    "company": "Unternehmen",
+    "about": "Über Uns",
+    "team": "Unser Team",
+    "careers": "Karriere",
+    "pages": "Seiten",
+    "track": "Sendung Verfolgen",
+    "booking": "Sendung Buchen",
+    "faq": "Häufige Fragen",
+    "testimonials": "Kundenmeinungen",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "bookShipment": "Sendung Buchen"
+  },
+  "hero": {
+    "slide1": {
+      "title": "Globaler Seefracht mit Vertrauenswürdigem Versand",
+      "desc": "Wir arbeiten mit zuverlässigen internationalen Spediteuren zusammen, um einen reibungslosen Frachttransport über wichtige Häfen zu gewährleisten. FCL, LCL oder schneller Transitservice — wir sichern die beste Route.",
+      "cta": "Sendung Buchen"
+    },
+    "slide2": {
+      "title": "Schnelle und Zuverlässige Luftfrachtlösungen",
+      "desc": "Von Expresslieferungen bis zu schwerer Fracht verbindet unser Luftfrachtnetz Sie mit über 150 Ländern — mit Geschwindigkeit, Sicherheit und Echtzeit-Tracking.",
+      "cta": "Angebot Anfordern"
+    },
+    "slide3": {
+      "title": "Vollständiger LKW-Transport quer durch die USA",
+      "desc": "Komplettladung, Teilladung und spezialisierter Transport. Unsere nationale Flotte liefert Ihre Fracht sicher und pünktlich.",
+      "cta": "Mehr Erfahren"
+    },
+    "tag1": "Zuverlässige Globale Abdeckung",
+    "tag2": "Flexible Frachtoptionen",
+    "tag3": "Pünktliche Lieferung",
+    "tag4": "Kosteneffiziente Lösungen"
+  },
+  "services": {
+    "title": "Unsere Dienstleistungen",
+    "subtitle": "Dienstleistungen",
+    "trucking": "LKW-Transport",
+    "truckingDesc": "Zuverlässiger Straßentransport für Sendungen quer durch die USA mit flexiblen Flottenoptionen.",
+    "airFreight": "Luftfracht",
+    "airFreightDesc": "Schnelle Lieferung zeitkritischer Fracht über globale Flugrouten mit Echtzeit-Tracking.",
+    "shipFreight": "Seefracht",
+    "shipFreightDesc": "Kostengünstige Versandlösung für Massengut mit zuverlässigen internationalen Seefrachstdiensten.",
+    "railFreight": "Schienentransport",
+    "railFreightDesc": "Effizienter und umweltfreundlicher Schienentransport ideal für schwere Langstreckensendungen.",
+    "warehousing": "Lagerhaltung",
+    "warehousingDesc": "Sicheres Lager mit Bestandsverwaltung, Auftragsabwicklung und bundesweiter Verteilung.",
+    "customs": "Zollabfertigung",
+    "customsDesc": "Fachkundige Unterstützung bei Import-/Exportbestimmungen für eine reibungslose Zollabfertigung.",
+    "lastMile": "Last-Mile-Lieferung",
+    "lastMileDesc": "Zuverlässiger End-to-End-Lieferservice, der Sendungen schnell und sicher zur Tür der Kunden bringt.",
+    "projectCargo": "Projektfracht",
+    "projectCargoDesc": "Spezialisierte Transportlösungen für übergroße, schwere oder komplexe Fracht mit maßgeschneiderter Planung."
+  },
+  "whyUs": {
+    "title": "Warum Uns Wählen",
+    "subtitle": "Warum Wir",
+    "item1Title": "Erfahrene Logistik",
+    "item1Desc": "Unsere Spezialisten bringen jahrzehntelange Erfahrung in der Spedition und im Zollwesen mit, um effiziente globale Lieferkettenlösungen zu gewährleisten.",
+    "item2Title": "Schnelle Lieferverpflichtung",
+    "item2Desc": "Wir verstehen die Dringlichkeit jeder Sendung und handeln schnell. Optimierte Routen und Tracking-Technologie sichern pünktliche Lieferungen.",
+    "item3Title": "Transparente Preispolitik",
+    "item3Desc": "Unsere Preise sind klar, wettbewerbsfähig und leicht verständlich. Keine versteckten Gebühren und vollständige finanzielle Transparenz.",
+    "item4Title": "Zuverlässige Frachtabwicklung",
+    "item4Desc": "Jede Sendung wird präzise und sorgfältig verwaltet. Von der Verpackung bis zur Beladung garantieren wir sichere Lieferung.",
+    "item5Title": "Umfassende Lösungen",
+    "item5Desc": "Wir decken jeden Schritt der Logistik ab, einschließlich Lagerung, Verteilung und Fracht. Unsere integrierten Dienste vereinfachen das Supply Chain Management.",
+    "item6Title": "Zufriedenheitsgarantie",
+    "item6Desc": "Ihr Vertrauen hat bei uns höchste Priorität. Wir stehen hinter unseren Leistungen mit reaktionsschnellem Support und starker Kundenzufriedenheitsgarantie."
+  },
+  "cta": {
+    "title": "Bereit, Ihre Fracht Weltweit zu Versenden?",
+    "btn": "Sendung Buchen"
+  },
+  "footer": {
+    "services": "Dienstleistungen",
+    "company": "Unternehmen",
+    "getInTouch": "Kontakt Aufnehmen",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "office": "Bürostandort",
+    "copyright": "Urheberrecht",
+    "by": "von"
+  },
+  "offcanvas": {
+    "ourServices": "Unsere Dienstleistungen",
+    "contact": "Kontaktieren Sie Uns",
+    "about": "Über Uns",
+    "aboutDesc": "Wir sind ein vertrauenswürdiger Anbieter von Logistik- und Frachtlösungen, der sich verpflichtet hat, Ihre Waren sicher, effizient und pünktlich zu liefern."
+  }
+}

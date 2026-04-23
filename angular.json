@@ -26,13 +26,19 @@
               { "glob": "**/*", "input": "public" },
               { "glob": "**/*", "input": "src/assets", "output": "assets" }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "src/assets/css/plugins.css",
+              "src/assets/css/theme.css",
+              "src/assets/css/responsive.css"
+            ],
             "scripts": [
               "src/assets/js/plugins.js",
               "src/assets/js/designesia.js",
               "src/assets/js/swiper.js",
               "src/assets/js/custom-swiper-1.js",
-              "src/assets/js/custom-marquee.js"
+              "src/assets/js/custom-marquee.js",
+
             ]
           },
           "configurations": {

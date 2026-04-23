@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "serviceSingle": "Service Single",
+    "company": "Company",
+    "about": "About Us",
+    "team": "Our Team",
+    "careers": "Careers",
+    "pages": "Pages",
+    "track": "Track Your Package",
+    "booking": "Book Shipment",
+    "faq": "FAQ",
+    "testimonials": "Testimonials",
+    "blog": "Blog",
+    "contact": "Contact",
+    "bookShipment": "Book Shipment"
+  },
+  "hero": {
+    "slide1": {
+      "title": "Global Ship Freight with Trusted Shipping",
+      "desc": "We work with reliable international carriers to ensure smooth cargo movement across major ports. Whether you need FCL, LCL, or fast transit service, we secure the best route and handle the logistics.",
+      "cta": "Book Shipment"
+    },
+    "slide2": {
+      "title": "Fast & Reliable Air Freight Solutions",
+      "desc": "From express deliveries to heavy cargo, our air freight network connects you to over 150 countries. Speed, safety, and real-time tracking for every shipment.",
+      "cta": "Get a Quote"
+    },
+    "slide3": {
+      "title": "Complete Trucking Across the United States",
+      "desc": "Full truckload, LTL, and specialized trucking services. Our nationwide fleet delivers your freight safely and on time, every time.",
+      "cta": "Learn More"
+    },
+    "tag1": "Reliable Global Coverage",
+    "tag2": "Flexible Cargo Options",
+    "tag3": "On-Time Delivery",
+    "tag4": "Cost-Effective Solutions"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Services",
+    "trucking": "Trucking",
+    "truckingDesc": "Reliable ground transportation for shipments across the United States with flexible fleet options.",
+    "airFreight": "Air Freight",
+    "airFreightDesc": "Fast delivery of time-sensitive cargo using global air routes with real-time tracking.",
+    "shipFreight": "Ship Freight",
+    "shipFreightDesc": "Cost-effective shipping solution for bulk cargo with dependable international sea freight services.",
+    "railFreight": "Rail Freight",
+    "railFreightDesc": "Efficient and eco-friendly rail transport option ideal for long-distance heavy shipments.",
+    "warehousing": "Warehousing",
+    "warehousingDesc": "Secure storage with inventory management, order fulfillment, and nationwide distribution.",
+    "customs": "Customs Brokerage",
+    "customsDesc": "Expert assistance in navigating import/export regulations to ensure smooth customs clearance.",
+    "lastMile": "Last-Mile Delivery",
+    "lastMileDesc": "Reliable end-to-end delivery service ensuring shipments reach customers' doors quickly and safely.",
+    "projectCargo": "Project Cargo",
+    "projectCargoDesc": "Specialized transport solutions for oversized, heavy, or complex cargo requiring tailored logistics planning."
+  },
+  "whyUs": {
+    "title": "Why Choose Us",
+    "subtitle": "Why Us",
+    "item1Title": "Experienced Logistics",
+    "item1Desc": "Our specialists bring decades of experience in freight forwarding and customs clearance, ensuring smooth and efficient supply chain solutions worldwide.",
+    "item2Title": "Fast Delivery Commitment",
+    "item2Desc": "We understand the urgency of every shipment and act quickly. Optimized routes and tracking technology ensure timely deliveries without unnecessary delays.",
+    "item3Title": "Transparent Pricing Policy",
+    "item3Desc": "Our pricing is clear, competitive, and easy to understand for all clients. We guarantee no hidden charges and complete financial transparency every time.",
+    "item4Title": "Reliable Cargo Handling",
+    "item4Desc": "Every shipment is managed with precision and care to avoid risks. From packing to loading, we guarantee your cargo arrives safely and intact.",
+    "item5Title": "Comprehensive Solutions",
+    "item5Desc": "We cover every step of logistics including warehousing, distribution, and freight. Our integrated services make supply chain management simple and efficient.",
+    "item6Title": "Satisfaction Guarantee",
+    "item6Desc": "Your trust is our highest priority across all shipments. We back our services with responsive support and a strong customer satisfaction guarantee."
+  },
+  "cta": {
+    "title": "Ready to Ship Your Cargo Worldwide?",
+    "btn": "Book Shipment"
+  },
+  "footer": {
+    "services": "Services",
+    "company": "Company",
+    "getInTouch": "Get in Touch",
+    "email": "Email",
+    "phone": "Phone",
+    "office": "Office Location",
+    "copyright": "Copyright",
+    "by": "by"
+  },
+  "offcanvas": {
+    "ourServices": "Our Services",
+    "contact": "Contact Us",
+    "about": "About Us",
+    "aboutDesc": "We are a trusted logistics and cargo solutions provider committed to delivering your goods safely, efficiently, and on time."
+  }
+}

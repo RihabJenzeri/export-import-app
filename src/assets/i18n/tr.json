@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "serviceSingle": "Hizmet Detayı",
+    "company": "Şirket",
+    "about": "Hakkımızda",
+    "team": "Ekibimiz",
+    "careers": "Kariyer",
+    "pages": "Sayfalar",
+    "track": "Gönderi Takibi",
+    "booking": "Gönderi Rezervasyonu",
+    "faq": "Sık Sorulan Sorular",
+    "testimonials": "Müşteri Yorumları",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "bookShipment": "Gönderi Rezervasyonu"
+  },
+  "hero": {
+    "slide1": {
+      "title": "Güvenilir Nakliye ile Küresel Deniz Taşımacılığı",
+      "desc": "Başlıca limanlarda sorunsuz kargo hareketi sağlamak için güvenilir uluslararası taşıyıcılarla çalışıyoruz. FCL, LCL veya hızlı transit hizmet — en iyi rotayı güvence altına alıyoruz.",
+      "cta": "Gönderi Rezervasyonu"
+    },
+    "slide2": {
+      "title": "Hızlı ve Güvenilir Hava Kargo Çözümleri",
+      "desc": "Ekspres teslimatlardan ağır kargoya kadar, hava kargo ağımız sizi 150'den fazla ülkeyle buluşturuyor. Her gönderi için hız, güvenlik ve gerçek zamanlı takip.",
+      "cta": "Teklif Al"
+    },
+    "slide3": {
+      "title": "ABD Genelinde Tam Kamyon Taşımacılığı",
+      "desc": "Tam kamyon, parsiyel yük ve özel taşımacılık hizmetleri. Ulusal filomuz kargonuzu güvenli ve zamanında teslim eder.",
+      "cta": "Daha Fazla Bilgi"
+    },
+    "tag1": "Güvenilir Küresel Kapsama",
+    "tag2": "Esnek Kargo Seçenekleri",
+    "tag3": "Zamanında Teslimat",
+    "tag4": "Uygun Maliyetli Çözümler"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Hizmetler",
+    "trucking": "Karayolu Taşımacılığı",
+    "truckingDesc": "Esnek filo seçenekleriyle ABD genelinde güvenilir kara taşımacılığı.",
+    "airFreight": "Hava Kargo",
+    "airFreightDesc": "Gerçek zamanlı takip ile küresel hava rotaları kullanarak zamana duyarlı kargonun hızlı teslimatı.",
+    "shipFreight": "Deniz Kargo",
+    "shipFreightDesc": "Güvenilir uluslararası deniz taşımacılığı hizmetleriyle dökme kargo için uygun maliyetli nakliye çözümü.",
+    "railFreight": "Demiryolu Taşımacılığı",
+    "railFreightDesc": "Uzun mesafeli ağır sevkiyatlar için ideal verimli ve çevre dostu demiryolu taşıma seçeneği.",
+    "warehousing": "Depolama",
+    "warehousingDesc": "Envanter yönetimi, sipariş karşılama ve ulusal dağıtım ile güvenli depolama.",
+    "customs": "Gümrük Müşavirliği",
+    "customsDesc": "Sorunsuz gümrük tasfiyesi sağlamak için ithalat/ihracat yönetmeliklerinde uzman yardım.",
+    "lastMile": "Son Kilometre Teslimat",
+    "lastMileDesc": "Gönderilerin müşterilerin kapılarına hızlı ve güvenli ulaşmasını sağlayan güvenilir uçtan uca teslimat hizmeti.",
+    "projectCargo": "Proje Kargo",
+    "projectCargoDesc": "Özel lojistik planlama gerektiren aşırı büyük, ağır veya karmaşık kargolar için özel taşıma çözümleri."
+  },
+  "whyUs": {
+    "title": "Neden Bizi Seçin",
+    "subtitle": "Neden Biz",
+    "item1Title": "Deneyimli Lojistik",
+    "item1Desc": "Uzmanlarımız, yük taşımacılığı ve gümrük tasfiyesinde on yılların deneyimini sunarak dünya genelinde verimli tedarik zinciri çözümleri sağlar.",
+    "item2Title": "Hızlı Teslimat Taahhüdü",
+    "item2Desc": "Her sevkiyatın aciliyetini anlıyoruz ve hızlı hareket ediyoruz. Optimize edilmiş rotalar ve takip teknolojisi zamanında teslimat sağlar.",
+    "item3Title": "Şeffaf Fiyatlandırma Politikası",
+    "item3Desc": "Fiyatlarımız net, rekabetçi ve anlaşılması kolaydır. Gizli ücret garantisi ve her seferinde tam finansal şeffaflık.",
+    "item4Title": "Güvenilir Kargo Elleçleme",
+    "item4Desc": "Her sevkiyat riskleri önlemek için hassasiyet ve özenle yönetilir. Ambalajdan yüklemeye kadar kargonuzun güvenli ulaşmasını garanti ediyoruz.",
+    "item5Title": "Kapsamlı Çözümler",
+    "item5Desc": "Depolama, dağıtım ve navlun dahil lojistiğin her adımını kapsıyoruz. Entegre hizmetlerimiz tedarik zinciri yönetimini basitleştirir.",
+    "item6Title": "Memnuniyet Garantisi",
+    "item6Desc": "Güveniniz en yüksek önceliğimizdir. Hizmetlerimizi duyarlı destek ve güçlü müşteri memnuniyeti garantisiyle destekliyoruz."
+  },
+  "cta": {
+    "title": "Kargonuzu Dünya Genelinde Göndermek İster misiniz?",
+    "btn": "Gönderi Rezervasyonu"
+  },
+  "footer": {
+    "services": "Hizmetler",
+    "company": "Şirket",
+    "getInTouch": "İletişime Geçin",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "office": "Ofis Konumu",
+    "copyright": "Telif Hakkı",
+    "by": "tarafından"
+  },
+  "offcanvas": {
+    "ourServices": "Hizmetlerimiz",
+    "contact": "Bize Ulaşın",
+    "about": "Hakkımızda",
+    "aboutDesc": "Mallarınızı güvenli, verimli ve zamanında teslim etmeye kararlı, güvenilir bir lojistik ve kargo çözümleri sağlayıcısıyız."
+  }
+}

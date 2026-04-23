@@ -1,0 +1,318 @@
+/* =============================================================
+   services-page.component.css
+   Reproduit EXACTEMENT le visuel du template LogiXpress service-2
+   ============================================================= */
+
+/* ── Variables (palette LogiXpress) ──────────────────────── */
+:host {
+  --lp-orange:   #f85c00;
+  --lp-dark:     #111827;
+  --lp-dark2:    #1c2430;
+  --lp-grey:     #6b7280;
+  --lp-white:    #ffffff;
+  --lp-border:   rgba(255,255,255,0.08);
+  display: block;
+  font-family: 'Barlow', 'Manrope', sans-serif;
+}
+
+/* =============================================================
+   HERO / PAGE TITLE
+   ============================================================= */
+.lp-page-title {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Image de fond identique au template (port/containers) */
+  background-image: linear-gradient(135deg, #0a1220, #141e2d);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Fallback gradient si pas d'image */
+  background-color: #1c2430;
+  overflow: hidden;
+}
+
+/* Overlay orange comme dans le template */
+.lp-page-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 30, 0.55) 0%,
+    rgba(200, 80, 0, 0.65) 100%
+  );
+  z-index: 1;
+}
+
+.lp-page-title__content {
+  position: relative;
+  z-index: 2;
+  padding: 60px 20px;
+}
+
+.lp-page-title__heading {
+  font-family: 'Roboto Slab', 'Barlow', serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--lp-white);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+/* Breadcrumb */
+.lp-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.lp-breadcrumb__home {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.lp-breadcrumb__home:hover { color: var(--lp-white); }
+
+.lp-breadcrumb__sep {
+  color: var(--lp-orange);
+  font-size: 0.75rem;
+}
+
+.lp-breadcrumb__current {
+  color: var(--lp-white);
+  font-weight: 600;
+}
+
+/* =============================================================
+   SERVICES SECTION — GRILLE EXACTE DU TEMPLATE
+   Le template utilise une grille 2 colonnes avec :
+   - colonne gauche : image carrée + numéro
+   - colonne droite : fond sombre + titre + description
+   ============================================================= */
+.lp-services-section {
+  padding: 80px 0;
+  background: var(--lp-white);
+}
+
+.lp-services-grid {
+  display: grid;
+  /* 2 colonnes, chaque carte occupe 1 colonne.
+     Sur desktop : 4 cartes par ligne (2 cartes = 1 "bloc image + texte")
+     Comme dans le template : grille de 4 colonnes */
+  grid-template-columns: repeat(4, 1fr);
+  /* Pas de gap entre les cellules — les cartes se touchent */
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Chaque "lp-scard" = un bloc image+texte comme dans le template */
+.lp-scard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.35s ease;
+}
+
+.lp-scard:hover {
+  transform: translateY(-6px);
+  z-index: 2;
+}
+
+/* ── Image wrapper ────────────────────────────────────────── */
+.lp-scard__img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;          /* carré comme dans le template */
+  background: #0a0f18;
+}
+
+.lp-scard__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lp-scard:hover .lp-scard__img {
+  transform: scale(1.08);
+}
+
+/* Overlay gradient sombre sur l'image (comme dans le template) */
+.lp-scard__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  transition: opacity 0.3s;
+}
+
+/* Numéro (01, 02, ...) en haut à gauche de l'image */
+.lp-scard__num {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 3;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--lp-white);
+  background: transparent;
+  margin: 0;
+  line-height: 1;
+  /* Style du template : texte seul, blanc */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ── Text body (fond sombre sous l'image) ─────────────────── */
+.lp-scard__body {
+  background: var(--lp-dark2);
+  padding: 22px 24px 26px;
+  flex: 1;
+  border-top: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.lp-scard:hover .lp-scard__body {
+  border-top-color: var(--lp-orange);
+}
+
+.lp-scard__title {
+  font-family: 'Barlow', 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+.lp-scard__title a {
+  color: var(--lp-white);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lp-scard__title a:hover {
+  color: var(--lp-orange);
+}
+
+.lp-scard__body p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* =============================================================
+   CTA SECTION
+   ============================================================= */
+.lp-cta-section {
+  background: var(--lp-dark);
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lp-cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(248,92,0,0.12) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.lp-cta-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-cta-text h4 {
+  font-family: 'Roboto Slab', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--lp-white);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.lp-cta-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--lp-orange);
+  color: var(--lp-white);
+  font-family: 'Barlow', 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 4px 20px rgba(248,92,0,0.35);
+}
+
+.lp-cta-btn:hover {
+  background: #d44e00;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(248,92,0,0.5);
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 1200px) {
+  .lp-services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .lp-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+  }
+  .lp-cta-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .lp-services-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  .lp-page-title {
+    min-height: 260px;
+  }
+  .lp-services-section {
+    padding: 40px 0;
+  }
+  .lp-cta-section {
+    padding: 40px 20px;
+  }
+}

@@ -578,7 +578,178 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
     <!-- overlay content end -->
-  `
+  `,
+  styles: [`
+    /* ============================================================
+       HERO SLIDER - IMAGE RESPONSIVE
+       ============================================================ */
+
+    /* Conteneur principal */
+    .mh-800 {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* L'image de fond responsive */
+    .swiper-inner {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Overlay pour le texte */
+    .swiper-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
+      z-index: 1;
+    }
+
+    .sw-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .op-4 { opacity: 0.4; }
+
+    /* Contenu du slide */
+    .sw-caption {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 100px 20px;
+    }
+
+    .sw-text-wrapper h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .sw-text-wrapper p {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* RESPONSIVE - Mobile */
+    @media (max-width: 768px) {
+      .mh-800 {
+        min-height: 80vh;
+      }
+
+      .swiper-inner {
+        min-height: 80vh;
+        background-position: 70% center !important;
+      }
+
+      .sw-caption {
+        padding: 60px 15px;
+      }
+
+      .sw-text-wrapper h1 {
+        font-size: 1.8rem;
+      }
+
+      .sw-text-wrapper p {
+        font-size: 0.85rem;
+        padding: 0 10px;
+      }
+
+      .sm-hide {
+        display: none !important;
+      }
+    }
+
+    /* RESPONSIVE - Très petits écrans */
+    @media (max-width: 480px) {
+      .mh-800 {
+        min-height: 70vh;
+      }
+
+      .swiper-inner {
+        min-height: 70vh;
+        background-position: 65% center !important;
+      }
+
+      .sw-caption {
+        padding: 40px 12px;
+      }
+
+      .sw-text-wrapper h1 {
+        font-size: 1.5rem;
+      }
+
+      .btn-main {
+        padding: 8px 20px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* RESPONSIVE - Tablettes */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .mh-800 {
+        min-height: 90vh;
+      }
+
+      .swiper-inner {
+        min-height: 90vh;
+      }
+
+      .sw-text-wrapper h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Animation pour le texte */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated {
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    .fadeInUp {
+      animation-name: fadeInUp;
+    }
+
+    .anim-order-1 { animation-delay: 0.1s; }
+    .anim-order-2 { animation-delay: 0.3s; }
+    .anim-order-3 { animation-delay: 0.5s; }
+  `]
 })
 export class HomeComponent implements AfterViewInit {
   year = new Date().getFullYear();

@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "serviceSingle": "Détail du Service",
+    "company": "Entreprise",
+    "about": "À Propos",
+    "team": "Notre Équipe",
+    "careers": "Emplois",
+    "pages": "Pages",
+    "track": "Suivre votre Colis",
+    "booking": "Réserver un Envoi",
+    "faq": "FAQ",
+    "testimonials": "Témoignages",
+    "blog": "Blog",
+    "contact": "Contact",
+    "bookShipment": "Réserver un Envoi"
+  },
+  "hero": {
+    "slide1": {
+      "title": "Fret Maritime Mondial avec Expédition de Confiance",
+      "desc": "Nous travaillons avec des transporteurs internationaux fiables pour assurer un mouvement fluide des marchandises dans les principaux ports. FCL, LCL ou transit rapide, nous sécurisons la meilleure route.",
+      "cta": "Réserver un Envoi"
+    },
+    "slide2": {
+      "title": "Solutions de Fret Aérien Rapides et Fiables",
+      "desc": "Des livraisons express aux cargaisons lourdes, notre réseau de fret aérien vous connecte à plus de 150 pays avec vitesse, sécurité et suivi en temps réel.",
+      "cta": "Obtenir un Devis"
+    },
+    "slide3": {
+      "title": "Transport Routier Complet à Travers les États-Unis",
+      "desc": "Services de camion complet, groupage et transport spécialisé. Notre flotte nationale livre votre fret en toute sécurité et dans les délais.",
+      "cta": "En Savoir Plus"
+    },
+    "tag1": "Couverture Mondiale Fiable",
+    "tag2": "Options de Fret Flexibles",
+    "tag3": "Livraison à Temps",
+    "tag4": "Solutions Économiques"
+  },
+  "services": {
+    "title": "Nos Services",
+    "subtitle": "Services",
+    "trucking": "Transport Routier",
+    "truckingDesc": "Transport terrestre fiable pour les expéditions à travers les États-Unis avec des options de flotte flexibles.",
+    "airFreight": "Fret Aérien",
+    "airFreightDesc": "Livraison rapide de marchandises urgentes via des routes aériennes mondiales avec suivi en temps réel.",
+    "shipFreight": "Fret Maritime",
+    "shipFreightDesc": "Solution d'expédition rentable pour les cargaisons en vrac avec des services de fret maritime international fiables.",
+    "railFreight": "Transport Ferroviaire",
+    "railFreightDesc": "Option de transport ferroviaire efficace et écologique idéale pour les expéditions lourdes longue distance.",
+    "warehousing": "Entreposage",
+    "warehousingDesc": "Stockage sécurisé avec gestion des stocks, exécution des commandes et distribution nationale.",
+    "customs": "Courtage en Douane",
+    "customsDesc": "Assistance experte pour naviguer les réglementations import/export et garantir un dédouanement fluide.",
+    "lastMile": "Livraison du Dernier Kilomètre",
+    "lastMileDesc": "Service de livraison de bout en bout fiable garantissant que les expéditions arrivent rapidement et en toute sécurité.",
+    "projectCargo": "Cargo de Projet",
+    "projectCargoDesc": "Solutions de transport spécialisées pour les marchandises surdimensionnées, lourdes ou complexes."
+  },
+  "whyUs": {
+    "title": "Pourquoi Nous Choisir",
+    "subtitle": "Pourquoi Nous",
+    "item1Title": "Logistique Expérimentée",
+    "item1Desc": "Nos spécialistes apportent des décennies d'expérience en transit et dédouanement, garantissant des solutions de chaîne d'approvisionnement efficaces.",
+    "item2Title": "Engagement de Livraison Rapide",
+    "item2Desc": "Nous comprenons l'urgence de chaque expédition. Des routes optimisées et la technologie de suivi garantissent des livraisons ponctuelles.",
+    "item3Title": "Politique de Prix Transparente",
+    "item3Desc": "Nos prix sont clairs, compétitifs et faciles à comprendre. Aucun frais caché et transparence financière totale.",
+    "item4Title": "Manutention Fiable des Marchandises",
+    "item4Desc": "Chaque expédition est gérée avec précision et soin. De l'emballage au chargement, nous garantissons que votre cargaison arrive intact.",
+    "item5Title": "Solutions Complètes",
+    "item5Desc": "Nous couvrons chaque étape de la logistique incluant l'entreposage, la distribution et le fret. Nos services intégrés simplifient la gestion.",
+    "item6Title": "Garantie de Satisfaction",
+    "item6Desc": "Votre confiance est notre priorité absolue. Nous soutenons nos services avec un support réactif et une solide garantie de satisfaction client."
+  },
+  "cta": {
+    "title": "Prêt à Expédier vos Marchandises dans le Monde Entier ?",
+    "btn": "Réserver un Envoi"
+  },
+  "footer": {
+    "services": "Services",
+    "company": "Entreprise",
+    "getInTouch": "Contactez-Nous",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "office": "Adresse du Bureau",
+    "copyright": "Droits Réservés",
+    "by": "par"
+  },
+  "offcanvas": {
+    "ourServices": "Nos Services",
+    "contact": "Contactez-Nous",
+    "about": "À Propos de Nous",
+    "aboutDesc": "Nous sommes un fournisseur de solutions logistiques et de fret de confiance, engagé à livrer vos marchandises en toute sécurité, efficacement et dans les délais."
+  }
+}
