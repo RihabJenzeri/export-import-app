@@ -2,95 +2,30 @@
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
-    "serviceSingle": "Detalle de Servicio",
     "company": "Empresa",
-    "about": "Quiénes Somos",
-    "team": "Nuestro Equipo",
-    "careers": "Empleo",
     "pages": "Páginas",
-    "track": "Rastrear Envío",
-    "booking": "Reservar Envío",
-    "faq": "Preguntas Frecuentes",
-    "testimonials": "Testimonios",
     "blog": "Blog",
     "contact": "Contacto",
-    "bookShipment": "Reservar Envío"
+    "bookShipment": "Reservar envío",
+    "aboutUs": "Sobre nosotros",
+    "ourTeam": "Nuestro equipo",
+    "certifications": "Certificaciones",
+    "careers": "Empleos",
+    "trackPackage": "Rastrear paquete",
+    "faq": "FAQ",
+    "testimonials": "Testimonios"
   },
-  "hero": {
-    "slide1": {
-      "title": "Flete Marítimo Global con Envío de Confianza",
-      "desc": "Trabajamos con transportistas internacionales confiables para garantizar el movimiento fluido de carga en los principales puertos. Ya sea FCL, LCL o servicio de tránsito rápido, aseguramos la mejor ruta.",
-      "cta": "Reservar Envío"
-    },
-    "slide2": {
-      "title": "Soluciones de Carga Aérea Rápidas y Confiables",
-      "desc": "Desde entregas urgentes hasta carga pesada, nuestra red de carga aérea te conecta con más de 150 países con velocidad, seguridad y rastreo en tiempo real.",
-      "cta": "Obtener Cotización"
-    },
-    "slide3": {
-      "title": "Transporte Completo por Camión en Estados Unidos",
-      "desc": "Servicios de camión completo, carga parcial y transporte especializado. Nuestra flota nacional entrega tu carga de forma segura y puntual.",
-      "cta": "Saber Más"
-    },
-    "tag1": "Cobertura Global Confiable",
-    "tag2": "Opciones Flexibles de Carga",
-    "tag3": "Entrega a Tiempo",
-    "tag4": "Soluciones Rentables"
-  },
-  "services": {
-    "title": "Nuestros Servicios",
-    "subtitle": "Servicios",
-    "trucking": "Transporte por Camión",
-    "truckingDesc": "Transporte terrestre confiable para envíos en todo Estados Unidos con opciones de flota flexibles.",
-    "airFreight": "Carga Aérea",
-    "airFreightDesc": "Entrega rápida de carga urgente usando rutas aéreas globales con rastreo en tiempo real.",
-    "shipFreight": "Flete Marítimo",
-    "shipFreightDesc": "Solución de envío rentable para carga a granel con servicios confiables de flete marítimo internacional.",
-    "railFreight": "Transporte Ferroviario",
-    "railFreightDesc": "Opción de transporte ferroviario eficiente y ecológica ideal para envíos pesados de larga distancia.",
-    "warehousing": "Almacenamiento",
-    "warehousingDesc": "Almacenamiento seguro con gestión de inventario, cumplimiento de pedidos y distribución nacional.",
-    "customs": "Agencia Aduanera",
-    "customsDesc": "Asistencia experta para navegar las regulaciones de importación/exportación y garantizar el despacho aduanero.",
-    "lastMile": "Entrega de Última Milla",
-    "lastMileDesc": "Servicio de entrega confiable de extremo a extremo que garantiza que los envíos lleguen rápida y seguramente.",
-    "projectCargo": "Carga de Proyecto",
-    "projectCargoDesc": "Soluciones de transporte especializadas para carga sobredimensionada, pesada o compleja."
-  },
-  "whyUs": {
-    "title": "Por Qué Elegirnos",
-    "subtitle": "Por Qué Nosotros",
-    "item1Title": "Logística Experimentada",
-    "item1Desc": "Nuestros especialistas tienen décadas de experiencia en agencia aduanera y desaduanamiento, garantizando soluciones eficientes de cadena de suministro.",
-    "item2Title": "Compromiso de Entrega Rápida",
-    "item2Desc": "Entendemos la urgencia de cada envío y actuamos rápidamente. Rutas optimizadas y tecnología de rastreo garantizan entregas puntuales.",
-    "item3Title": "Política de Precios Transparente",
-    "item3Desc": "Nuestros precios son claros, competitivos y fáciles de entender. Sin cargos ocultos y total transparencia financiera.",
-    "item4Title": "Manejo Confiable de Carga",
-    "item4Desc": "Cada envío se gestiona con precisión y cuidado. Desde el embalaje hasta la carga, garantizamos que su carga llegue segura.",
-    "item5Title": "Soluciones Integrales",
-    "item5Desc": "Cubrimos cada paso de la logística incluyendo almacenamiento, distribución y flete. Nuestros servicios integrados simplifican la cadena de suministro.",
-    "item6Title": "Garantía de Satisfacción",
-    "item6Desc": "Su confianza es nuestra máxima prioridad. Respaldamos nuestros servicios con soporte receptivo y una sólida garantía de satisfacción."
-  },
-  "cta": {
-    "title": "¿Listo para Enviar su Carga a Todo el Mundo?",
-    "btn": "Reservar Envío"
+  "slider": {
+    "slide1Title": "Flete marítimo global con envío de confianza",
+    "slide1Desc": "Trabajamos con transportistas internacionales confiables para garantizar un movimiento fluido de carga en los principales puertos.",
+    "slide2Title": "Transporte de contenedores eficiente más allá de las fronteras",
+    "slide2Desc": "Desde contenedores estándar hasta equipos especializados, gestionamos diversas necesidades de envío con precisión.",
+    "bookShipment": "Reservar envío"
   },
   "footer": {
-    "services": "Servicios",
-    "company": "Empresa",
-    "getInTouch": "Contáctenos",
-    "email": "Correo Electrónico",
+    "getInTouch": "Ponerse en contacto",
+    "email": "Correo electrónico",
     "phone": "Teléfono",
-    "office": "Ubicación de Oficina",
-    "copyright": "Derechos Reservados",
-    "by": "por"
-  },
-  "offcanvas": {
-    "ourServices": "Nuestros Servicios",
-    "contact": "Contáctenos",
-    "about": "Quiénes Somos",
-    "aboutDesc": "Somos un proveedor confiable de soluciones de logística y carga comprometido con entregar sus bienes de forma segura, eficiente y a tiempo."
+    "office": "Ubicación de la oficina"
   }
 }

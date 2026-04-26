@@ -27,7 +27,13 @@
               { "glob": "**/*", "input": "src/assets", "output": "assets" }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/swiper.css",
+              "src/assets/css/swiper-custom-1.css",
+              "src/assets/css/style.css",
+              "src/assets/css/coloring.css",
+              "src/assets/css/colors/scheme-01.css"
             ],
             "scripts": [
               "src/assets/js/plugins.js",
