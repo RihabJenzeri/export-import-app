@@ -37,28 +37,9 @@ import { TranslatePipe } from '../services/translation/translate.pipe';
                   <ul id="mainmenu">
                     <li><a routerLink="/" routerLinkActive="active">Home</a></li>
                     <li><a routerLink="/services" routerLinkActive="active">Services</a>
-                      <ul>
-                        <li><a routerLink="/services">Services</a></li>
-                        <li><a routerLink="/service-single">Service Single</a></li>
-                      </ul>
+
                     </li>
-                    <li><a href="#">Company</a>
-                      <ul>
-                        <li><a routerLink="/about">About Us</a></li>
-                        <li><a routerLink="/team">Our Team</a></li>
-                        <li><a routerLink="/careers">Careers</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                      <ul>
-                        <li><a routerLink="/track">Track Your Package</a></li>
-                        <li><a routerLink="/booking">Book Shipment</a></li>
-                        <li><a routerLink="/faq">FAQ</a></li>
-                        <li><a routerLink="/testimonials">Testimonials</a></li>
-                      </ul>
-                    </li>
-                    <li><a routerLink="/blog">Blog</a></li>
-                    <li><a routerLink="/contact">Contact</a></li>
+
                   </ul>
                 </div>
                 <div class="de-flex-col">
