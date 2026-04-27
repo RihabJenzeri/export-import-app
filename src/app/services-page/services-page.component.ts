@@ -1,10 +1,16 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+// Ajouter les imports manquants
+import { TranslationService, LANGUAGES, Language, LangCode } from '../services/translation/translation.service';
+import { TranslatePipe } from '../services/translation/translate.pipe';
 
 @Component({
   selector: 'app-services-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, TranslatePipe],
   template: `
     <div id="wrapper">
       <a href="#" id="back-to-top"></a>
@@ -20,87 +26,68 @@ import { CommonModule } from '@angular/common';
               <div class="de-flex sm-pt10">
                 <div class="de-flex-col">
                   <div id="logo">
-                    <a href="/">
-                      <img class="logo-main"   src="assets/images/logo.png" alt="">
-                      <img class="logo-scroll" src="assets/images/logo.png" alt="">
-                      <img class="logo-mobile" src="assets/images/logo.png" alt="">
+                    <a routerLink="/">
+                      <img class="logo-main" src="assets/images/logo.png" alt="LogiXpress">
+                      <img class="logo-scroll" src="assets/images/logo.png" alt="LogiXpress">
+                      <img class="logo-mobile" src="assets/images/logo.png" alt="LogiXpress">
                     </a>
                   </div>
                 </div>
                 <div class="de-flex-col header-col-mid">
                   <ul id="mainmenu">
-                    <li><a class="menu-item" href="/">Home</a>
-                      <ul class="mega">
-                        <li>
-                          <div class="container">
-                            <div class="sb-menu p-4">
-                              <div class="row g-3">
-                                <div class="col-lg-4 col-md-6 text-center">
-                                  <div class="relative hover text-center overflow-hidden rounded-1">
-                                    <img src="assets/images/demo/homepage-1.webp" class="w-100 relative hover-scale-1-1" alt="">
-                                    <div class="abs abs-centered w-70 z-2 hover-op-1">
-                                      <a class="btn-main mb-2" href="/">Multipage</a>
-                                    </div>
-                                    <div class="hover-op-05 abs abs-centered bg-dark w-100 h-100 z-1"></div>
-                                  </div>
-                                  <h5 class="mt-2 mb-0">Logistic</h5>
-                                </div>
-                                <div class="col-lg-4 col-md-6 text-center">
-                                  <div class="relative hover text-center overflow-hidden rounded-1">
-                                    <img src="assets/images/demo/homepage-2.webp" class="w-100 relative hover-scale-1-1" alt="">
-                                    <div class="abs abs-centered w-70 z-2 hover-op-1">
-                                      <a class="btn-main mb-2" href="/">Ship Freight</a>
-                                    </div>
-                                    <div class="hover-op-05 abs abs-centered bg-dark w-100 h-100 z-1"></div>
-                                  </div>
-                                  <h5 class="mt-2 mb-0">Ship Freight</h5>
-                                </div>
-                                <div class="col-lg-4 col-md-6 text-center">
-                                  <div class="relative hover text-center overflow-hidden rounded-1">
-                                    <img src="assets/images/demo/homepage-3.webp" class="w-100 relative hover-scale-1-1" alt="">
-                                    <div class="abs abs-centered w-70 z-2 hover-op-1">
-                                      <a class="btn-main mb-2" href="/">Air Freight</a>
-                                    </div>
-                                    <div class="hover-op-05 abs abs-centered bg-dark w-100 h-100 z-1"></div>
-                                  </div>
-                                  <h5 class="mt-2 mb-0">Air Freight</h5>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="menu-item" href="/services">Services</a>
+                    <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+                    <li><a routerLink="/services" routerLinkActive="active">Services</a>
                       <ul>
-                        <li><a href="/services">Services</a></li>
-                        <li><a href="/service-single">Service Single</a></li>
+                        <li><a routerLink="/services">Services</a></li>
+                        <li><a routerLink="/service-single">Service Single</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="#">Company</a>
+                    <li><a href="#">Company</a>
                       <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/team">Our Team</a></li>
-                        <li><a href="/careers">Careers</a></li>
+                        <li><a routerLink="/about">About Us</a></li>
+                        <li><a routerLink="/team">Our Team</a></li>
+                        <li><a routerLink="/careers">Careers</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="#">Pages</a>
+                    <li><a href="#">Pages</a>
                       <ul>
-                        <li><a href="/track">Track Your Package</a></li>
-                        <li><a href="/booking">Book Shipment</a></li>
-                        <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/testimonials">Testimonials</a></li>
+                        <li><a routerLink="/track">Track Your Package</a></li>
+                        <li><a routerLink="/booking">Book Shipment</a></li>
+                        <li><a routerLink="/faq">FAQ</a></li>
+                        <li><a routerLink="/testimonials">Testimonials</a></li>
                       </ul>
                     </li>
-                    <li><a class="menu-item" href="/blog">Blog</a></li>
-                    <li><a class="menu-item" href="/contact">Contact</a></li>
+                    <li><a routerLink="/blog">Blog</a></li>
+                    <li><a routerLink="/contact">Contact</a></li>
                   </ul>
                 </div>
                 <div class="de-flex-col">
-                  <div class="menu_side_area">
-                    <a href="/booking" class="btn-main fx-slide"><span>Book Shipment</span></a>
-                    <span id="menu-btn"></span>
-                  </div>
+<!-- Dans le header de services-page.component.ts -->
+<div class="menu_side_area" style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap;">
+  <a routerLink="/booking" class="btn-main fx-slide sm-hide">
+    <span>{{ 'nav.bookShipment' | translate }}</span>
+  </a>
+
+  <!-- Lang switcher — même code que HomeComponent -->
+  <div class="lang-switcher" [class.open]="langOpen" (click)="$event.stopPropagation()">
+    <button class="lang-btn" (click)="toggleLang()">
+      <span class="flag">{{ currentLang?.flag }}</span>
+      <span class="code lang-label">{{ currentLang?.code?.toUpperCase() }}</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="lang-dropdown">
+      <div *ngFor="let lang of languages"
+           class="lang-option"
+           [class.active]="lang.code === currentLang?.code"
+           (click)="selectLang(lang.code)">
+        <span class="flag">{{ lang.flag }}</span>
+        <span>{{ lang.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <span id="menu-btn"></span>
+</div>
                   <div id="btn-extra">
                     <span></span>
                     <span></span>
@@ -127,7 +114,7 @@ import { CommonModule } from '@angular/common';
                 <nav class="wow fadeInUp" data-wow-delay=".2s">
                   <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item">
-                      <a href="/">Home</a>
+                      <a routerLink="/">Home</a>
                     </li>
                     <li class="breadcrumb-item active">Our Services</li>
                   </ol>
@@ -144,21 +131,19 @@ import { CommonModule } from '@angular/common';
             <div class="row g-4">
               <div class="col-lg-6 wow fadeInLeft"
                    *ngFor="let s of services; let i = index"
-                   [attr.data-wow-delay]="(i * 0.1) + 's'">
+                   [attr.data-wow-delay]="(i * 0.05) + 's'">
                 <div class="srv-card d-flex overflow-hidden">
-                  <!-- Image side -->
                   <div class="srv-img-wrap">
                     <span class="srv-num">{{ s.num }}</span>
-                    <img [src]="s.img" [alt]="s.title" class="srv-img">
+                    <img [src]="s.img" [alt]="s.title" class="srv-img" loading="lazy">
                     <div class="srv-img-overlay"></div>
                   </div>
-                  <!-- Text side -->
                   <div class="srv-text-wrap">
                     <h5 class="srv-title">
-                      <a [href]="s.link">{{ s.title }}</a>
+                      <a routerLink="/service-single">{{ s.title }}</a>
                     </h5>
                     <p class="srv-desc">{{ s.desc }}</p>
-                    <a [href]="s.link" class="srv-link">
+                    <a routerLink="/service-single" class="srv-link">
                       Learn More <i class="fa fa-arrow-right"></i>
                     </a>
                   </div>
@@ -167,7 +152,6 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
         </section>
-        <!-- services grid end -->
 
         <!-- ===== BOTTOM CTA BANNER ===== -->
         <section class="bg-color text-light pt-50 pb-50">
@@ -178,7 +162,8 @@ import { CommonModule } from '@angular/common';
               </div>
               <div class="col-lg-3 text-lg-end">
                 <a class="btn-main fx-slide btn-line wow fadeInRight"
-                   data-wow-delay=".2s" href="/booking">
+                   data-wow-delay=".2s"
+                   routerLink="/booking">
                   <span>Book Shipment</span>
                 </a>
               </div>
@@ -194,19 +179,19 @@ import { CommonModule } from '@angular/common';
         <div class="container">
           <div class="row g-4 justify-content-between">
             <div class="col-md-6">
-              <img src="assets/images/logo.png" class="w-170px mb-2" alt="">
+              <img src="assets/images/logo.png" style="max-height:50px;width:auto;" alt="LogiXpress">
               <div class="spacer-single"></div>
               <div class="row g-4">
                 <div class="col-md-6">
                   <div class="widget">
                     <h5>Services</h5>
                     <ul>
-                      <li><a href="/service-single">Trucking</a></li>
-                      <li><a href="/service-single">Air Freight</a></li>
-                      <li><a href="/service-single">Ship Freight</a></li>
-                      <li><a href="/service-single">Rail Freight</a></li>
-                      <li><a href="/service-single">Warehousing</a></li>
-                      <li><a href="/service-single">Customs Brokerage</a></li>
+                      <li><a routerLink="/service-single">Trucking</a></li>
+                      <li><a routerLink="/service-single">Air Freight</a></li>
+                      <li><a routerLink="/service-single">Ship Freight</a></li>
+                      <li><a routerLink="/service-single">Rail Freight</a></li>
+                      <li><a routerLink="/service-single">Warehousing</a></li>
+                      <li><a routerLink="/service-single">Customs Brokerage</a></li>
                     </ul>
                   </div>
                 </div>
@@ -214,17 +199,17 @@ import { CommonModule } from '@angular/common';
                   <div class="widget">
                     <h5>Company</h5>
                     <ul>
-                      <li><a href="/">Home</a></li>
-                      <li><a href="/about">About Us</a></li>
-                      <li><a href="/team">Our Team</a></li>
-                      <li><a href="/careers">Careers</a></li>
-                      <li><a href="/blog">Blog</a></li>
-                      <li><a href="/contact">Contact</a></li>
+                      <li><a routerLink="/">Home</a></li>
+                      <li><a routerLink="/about">About Us</a></li>
+                      <li><a routerLink="/team">Our Team</a></li>
+                      <li><a routerLink="/careers">Careers</a></li>
+                      <li><a routerLink="/blog">Blog</a></li>
+                      <li><a routerLink="/contact">Contact</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div class="social-icons mb-sm-30">
+              <div class="social-icons mb-sm-30 text-center">
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -263,13 +248,11 @@ import { CommonModule } from '@angular/common';
       <!-- footer end -->
 
     </div>
-    <!-- wrapper end -->
 
-    <!-- overlay content -->
     <div id="extra-wrap" class="text-light">
       <div id="btn-close"><span></span><span></span></div>
       <div id="extra-content">
-        <img src="assets/images/logo-white.webp" class="w-200px" alt="">
+        <img src="assets/images/logo.png" style="max-height:55px;width:auto;" alt="LogiXpress">
         <div class="spacer-30-line"></div>
         <h5>Our Services</h5>
         <ul class="ul-check">
@@ -299,10 +282,81 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
     </div>
-    <!-- overlay content end -->
   `,
   styles: [`
-    /* PAGE HERO AVEC ARRONDIS COMPLET */
+    /* ═══════════════════════════════════════
+       LANG SWITCHER
+    ═══════════════════════════════════════ */
+    .lang-switcher {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      z-index: 10000;
+    }
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff;
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .lang-btn:hover, .lang-btn:focus { background: rgba(255,255,255,0.28); outline: none; }
+    .lang-btn .flag  { font-size: 17px; line-height: 1; }
+    .lang-btn .code  { font-size: 12px; letter-spacing: .5px; text-transform: uppercase; }
+    .lang-btn .arrow { font-size: 9px; margin-left: 1px; opacity: .8; }
+
+    header.scroll-active .lang-btn {
+      background: rgba(0,0,0,0.07);
+      border-color: rgba(0,0,0,0.18);
+      color: #333;
+    }
+    .lang-dropdown {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 12px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      min-width: 160px;
+      max-height: 320px;
+      overflow-y: auto;
+      z-index: 99999;
+    }
+    .lang-switcher.open .lang-dropdown { display: block; }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #333;
+      transition: background .15s;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .lang-option:last-child { border-bottom: none; }
+    .lang-option:hover      { background: #f7f7f7; }
+    .lang-option.active     { background: #fff4ec; font-weight: 700; color: #e87c24; }
+    .lang-option .flag      { font-size: 20px; }
+
+    @media (max-width: 767px) {
+      .lang-btn .lang-label { display: none; }
+      .lang-btn { padding: 5px 8px; gap: 3px; }
+      .lang-dropdown { top: 60px; right: 8px; min-width: 150px; }
+    }
+    @media (max-width: 400px) {
+      .lang-dropdown { top: 56px; right: 4px; min-width: 140px; }
+    }
     .page-hero-services {
       position: relative;
       min-height: 450px;
@@ -315,20 +369,17 @@ import { CommonModule } from '@angular/common';
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       margin: 20px;
     }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(248, 92, 0, 0.88) 0%, rgba(0, 0, 0, 0.75) 100%);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
       width: 100%;
       padding: 60px 0;
     }
-
     .hero-title {
       font-size: 56px;
       font-weight: 800;
@@ -336,8 +387,6 @@ import { CommonModule } from '@angular/common';
       color: #fff;
       letter-spacing: -0.02em;
     }
-
-    /* Breadcrumb */
     .breadcrumb {
       background: transparent;
       padding: 0;
@@ -356,15 +405,10 @@ import { CommonModule } from '@angular/common';
       font-size: 16px;
       padding: 0 8px;
     }
-
-    /* ============================================
-       SERVICES CARDS - STYLE PROFESSIONNEL
-       ============================================ */
     .services-section {
       padding: 100px 0;
       background: #f8f9fa;
     }
-
     .srv-card {
       display: flex;
       border-radius: 16px;
@@ -374,19 +418,16 @@ import { CommonModule } from '@angular/common';
       background: #fff;
       height: 100%;
     }
-
     .srv-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
-
     .srv-img-wrap {
       position: relative;
       width: 45%;
       overflow: hidden;
       background: #0a0f18;
     }
-
     .srv-num {
       position: absolute;
       top: 20px;
@@ -398,7 +439,6 @@ import { CommonModule } from '@angular/common';
       font-family: 'Barlow', sans-serif;
       letter-spacing: -0.03em;
     }
-
     .srv-img {
       width: 100%;
       height: 100%;
@@ -406,17 +446,14 @@ import { CommonModule } from '@angular/common';
       display: block;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .srv-card:hover .srv-img {
       transform: scale(1.1);
     }
-
     .srv-img-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
     }
-
     .srv-text-wrap {
       width: 55%;
       background: #1a2332;
@@ -425,32 +462,26 @@ import { CommonModule } from '@angular/common';
       flex-direction: column;
       justify-content: center;
     }
-
     .srv-title {
       font-size: 22px;
       font-weight: 700;
       margin-bottom: 14px;
       letter-spacing: -0.3px;
     }
-
     .srv-title a {
       color: #ffffff;
       text-decoration: none;
       transition: color 0.25s ease;
-      font-family: 'Barlow', sans-serif;
     }
-
     .srv-title a:hover {
       color: #f85c00;
     }
-
     .srv-desc {
       color: rgba(255, 255, 255, 0.7);
       font-size: 14px;
       line-height: 1.7;
       margin-bottom: 20px;
     }
-
     .srv-link {
       color: #f85c00;
       font-size: 13px;
@@ -463,27 +494,14 @@ import { CommonModule } from '@angular/common';
       letter-spacing: 1px;
       transition: all 0.25s ease;
     }
-
-    .srv-link i {
-      font-size: 12px;
-      transition: transform 0.25s ease;
-    }
-
     .srv-link:hover {
       gap: 12px;
       color: #ff8c42;
     }
-
-    .srv-link:hover i {
-      transform: translateX(3px);
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 992px) {
       .services-section { padding: 70px 0; }
       .hero-title { font-size: 44px; }
     }
-
     @media (max-width: 768px) {
       .page-hero-services {
         border-radius: 20px;
@@ -495,7 +513,6 @@ import { CommonModule } from '@angular/common';
       .srv-title { font-size: 20px; }
       .srv-text-wrap { padding: 24px 20px; }
     }
-
     @media (max-width: 576px) {
       .page-hero-services {
         border-radius: 16px;
@@ -511,55 +528,104 @@ import { CommonModule } from '@angular/common';
       .srv-desc { font-size: 13px; }
       .srv-num { font-size: 32px; top: 12px; left: 12px; }
     }
-
-    @media (max-width: 400px) {
-      .page-hero-services {
-        border-radius: 12px;
-        margin: 8px;
-      }
-      .hero-title { font-size: 24px; }
-      .srv-img-wrap { min-height: 160px; }
-    }
   `]
 })
-export class ServicesPageComponent implements AfterViewInit {
+export class ServicesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   year = new Date().getFullYear();
+  private navSubscription!: Subscription;
+  languages = LANGUAGES;
+  currentLang: Language | undefined;
+  langOpen = false;
+  private sub!: Subscription;
 
+  private clickHandler!: () => void;
   services = [
-    { num: '01', title: 'Transport Routier de Qualité', desc: 'Solutions de transport fiables pour vos marchandises à travers le monde avec une flotte flexible et moderne.', img: 'assets/images/services/img.png', link: '/service-single' },
-    { num: '02', title: 'Fret Aérien Express', desc: 'Livraison rapide de marchandises urgentes utilisant les routes aériennes mondiales avec suivi en temps réel.', img: 'assets/images/services/img_1.png', link: '/service-single' },
-    { num: '03', title: 'Fret Maritime International', desc: 'Solutions économiques pour le transport de marchandises en vrac avec des services maritimes internationaux fiables.', img: 'assets/images/services/img_2.png', link: '/service-single' },
-    { num: '04', title: 'Transport Ferroviaire Écologique', desc: 'Option de transport ferroviaire efficace et écologique idéale pour les expéditions longue distance.', img: 'assets/images/services/img_3.png', link: '/service-single' },
-    { num: '05', title: 'Entreposage Sécurisé', desc: 'Stockage sécurisé avec gestion des stocks, exécution des commandes et distribution nationale.', img: 'assets/images/services/img_4.png', link: '/service-single' },
-    { num: '06', title: 'Courtage en Douane', desc: 'Assistance experte pour naviguer dans les réglementations d\'import/export pour un dédouanement sans heurts.', img: 'assets/images/services/img_5.png', link: '/service-single' },
-    { num: '07', title: 'Livraison Dernier Kilomètre', desc: 'Service de livraison fiable de bout en bout garantissant que les colis arrivent rapidement et en sécurité.', img: 'assets/images/services/img_6.png', link: '/service-single' },
-    { num: '08', title: 'Projets de Transport Spécial', desc: 'Solutions de transport spécialisées pour les marchandises surdimensionnées, lourdes ou complexes.', img: 'assets/images/services/img_7.png', link: '/service-single' },
-    { num: '09', title: 'Livraison Express Urgente', desc: 'Service de livraison express rapide et fiable pour les expéditions urgentes avec suivi en temps réel.', img: 'assets/images/services/img_8.png', link: '/service-single' },
-    { num: '10', title: 'Chaîne du Froid', desc: 'Logistique à température contrôlée pour les denrées périssables, produits pharmaceutiques et articles sensibles.', img: 'assets/images/services/img_9.png', link: '/service-single' },
-    { num: '11', title: 'Logistique E-commerce', desc: 'Solution complète de traitement pour les entreprises en ligne incluant stockage, emballage et expédition.', img: 'assets/images/services/img_10.png', link: '/service-single' },
-    { num: '12', title: 'Transport de Charges Lourdes', desc: 'Transport spécialisé pour les équipements surdimensionnés et lourds avec permis et escortes.', img: 'assets/images/services/img_11.png', link: '/service-single' },
-    { num: '13', title: 'Transport Intermodal', desc: 'Solutions combinées rail et camion pour un coût et une efficacité optimaux.', img: 'assets/images/services/img_12.png', link: '/service-single' },
-    { num: '14', title: 'Transport Transfrontalier', desc: 'Services experts de dédouanement et d\'expédition transfrontalière entre pays.', img: 'assets/images/services/img_13.png', link: '/service-single' },
-    { num: '15', title: 'Emballage Professionnel', desc: 'Services d\'emballage et de caisse professionnels pour garantir l\'arrivée sécurisée de votre cargaison.', img: 'assets/images/services/img_14.png', link: '/service-single' },
-    { num: '16', title: 'Assurance Cargo', desc: 'Options complètes d\'assurance cargo pour protéger vos envois contre les dommages ou la perte.', img: 'assets/images/services/img_15.png', link: '/service-single' },
-    { num: '17', title: 'Gestion de Chaîne Logistique', desc: 'Services de gestion et d\'optimisation de chaîne logistique de bout en bout pour les entreprises.', img: 'assets/images/services/img_16.png', link: '/service-single' },
-    { num: '18', title: 'Logistique Inverse', desc: 'Gestion efficace des retours et solutions logistiques inversées pour le e-commerce et la vente au détail.', img: 'assets/images/services/img_17.png', link: '/service-single' },
-    { num: '19', title: 'Affrètement Maritime', desc: 'Services d\'affrètement professionnels avec un réseau de transporteurs mondiaux.', img: 'assets/images/services/img_18.png', link: '/service-single' },
-    { num: '20', title: 'Conseil en Logistique', desc: 'Conseil expert en logistique pour optimiser votre chaîne d\'approvisionnement et réduire les coûts.', img: 'assets/images/services/img_19.png', link: '/service-single' },
-    { num: '21', title: 'Onions - Export Premium', desc: 'Exportation d\'oignons de qualité supérieure vers les marchés internationaux avec normes strictes.', img: 'assets/images/services/img_20.png', link: '/service-single' },
-    { num: '22', title: 'Garlic - Ail de Qualité', desc: 'Exportation d\'ail blanc et violet de haute qualité pour les marchés européens et mondiaux.', img: 'assets/images/services/img_21.png', link: '/service-single' },
-    { num: '23', title: 'Riz Basmati Premium', desc: 'Exportation de riz Basmati de qualité supérieure avec certification et traçabilité.', img: 'assets/images/services/img_22.png', link: '/service-single' },
-    { num: '24', title: 'Huiles Végétales', desc: 'Exportation d\'huile de maïs, d\'olive et de tournesol de qualité premium.', img: 'assets/images/services/img_23.png', link: '/service-single' },
-    { num: '25', title: 'Fruits Secs & Dattes', desc: 'Exportation de dattes Medjool, figues et fruits secs de première qualité.', img: 'assets/images/services/img_24.png', link: '/service-single' },
-    { num: '26', title: 'Épices & Aromates', desc: 'Exportation d\'épices sélectionnées : cumin, coriandre, curcuma, poivre et paprika.', img: 'assets/images/services/img_25.png', link: '/service-single' },
-    { num: '27', title: 'Agrumes & Fruits Frais', desc: 'Exportation d\'oranges, citrons, clémentines et fruits frais vers les marchés internationaux.', img: 'assets/images/services/img_26.png', link: '/service-single' }
+    { num: '01', title: 'Transport Routier de Qualité', desc: 'Solutions de transport fiables pour vos marchandises à travers le monde avec une flotte flexible et moderne.', img: 'assets/images/services/img.png' },
+    { num: '02', title: 'Fret Aérien Express', desc: 'Livraison rapide de marchandises urgentes utilisant les routes aériennes mondiales avec suivi en temps réel.', img: 'assets/images/services/img_1.png' },
+    { num: '03', title: 'Fret Maritime International', desc: 'Solutions économiques pour le transport de marchandises en vrac avec des services maritimes internationaux fiables.', img: 'assets/images/services/img_2.png' },
+    { num: '04', title: 'Transport Ferroviaire Écologique', desc: 'Option de transport ferroviaire efficace et écologique idéale pour les expéditions longue distance.', img: 'assets/images/services/img_3.png' },
+    { num: '05', title: 'Entreposage Sécurisé', desc: 'Stockage sécurisé avec gestion des stocks, exécution des commandes et distribution nationale.', img: 'assets/images/services/img_4.png' },
+    { num: '06', title: 'Courtage en Douane', desc: 'Assistance experte pour naviguer dans les réglementations d\'import/export pour un dédouanement sans heurts.', img: 'assets/images/services/img_5.png' },
+    { num: '07', title: 'Livraison Dernier Kilomètre', desc: 'Service de livraison fiable de bout en bout garantissant que les colis arrivent rapidement et en sécurité.', img: 'assets/images/services/img_6.png' },
+    { num: '08', title: 'Projets de Transport Spécial', desc: 'Solutions de transport spécialisées pour les marchandises surdimensionnées, lourdes ou complexes.', img: 'assets/images/services/img_7.png' },
+    { num: '09', title: 'Livraison Express Urgente', desc: 'Service de livraison express rapide et fiable pour les expéditions urgentes avec suivi en temps réel.', img: 'assets/images/services/img_8.png' },
+    { num: '10', title: 'Chaîne du Froid', desc: 'Logistique à température contrôlée pour les denrées périssables, produits pharmaceutiques et articles sensibles.', img: 'assets/images/services/img_9.png' },
+    { num: '11', title: 'Logistique E-commerce', desc: 'Solution complète de traitement pour les entreprises en ligne incluant stockage, emballage et expédition.', img: 'assets/images/services/img_10.png' },
+    { num: '12', title: 'Transport de Charges Lourdes', desc: 'Transport spécialisé pour les équipements surdimensionnés et lourds avec permis et escortes.', img: 'assets/images/services/img_11.png' },
+    { num: '13', title: 'Transport Intermodal', desc: 'Solutions combinées rail et camion pour un coût et une efficacité optimaux.', img: 'assets/images/services/img_12.png' },
+    { num: '14', title: 'Transport Transfrontalier', desc: 'Services experts de dédouanement et d\'expédition transfrontalière entre pays.', img: 'assets/images/services/img_13.png' },
+    { num: '15', title: 'Emballage Professionnel', desc: 'Services d\'emballage et de caisse professionnels pour garantir l\'arrivée sécurisée de votre cargaison.', img: 'assets/images/services/img_14.png' },
+    { num: '16', title: 'Assurance Cargo', desc: 'Options complètes d\'assurance cargo pour protéger vos envois contre les dommages ou la perte.', img: 'assets/images/services/img_15.png' },
+    { num: '17', title: 'Gestion de Chaîne Logistique', desc: 'Services de gestion et d\'optimisation de chaîne logistique de bout en bout pour les entreprises.', img: 'assets/images/services/img_16.png' },
+    { num: '18', title: 'Logistique Inverse', desc: 'Gestion efficace des retours et solutions logistiques inversées pour le e-commerce et la vente au détail.', img: 'assets/images/services/img_17.png' },
+    { num: '19', title: 'Affrètement Maritime', desc: 'Services d\'affrètement professionnels avec un réseau de transporteurs mondiaux.', img: 'assets/images/services/img_18.png' },
+    { num: '20', title: 'Conseil en Logistique', desc: 'Conseil expert en logistique pour optimiser votre chaîne d\'approvisionnement et réduire les coûts.', img: 'assets/images/services/img_19.png' },
+    { num: '21', title: 'Onions - Export Premium', desc: 'Exportation d\'oignons de qualité supérieure vers les marchés internationaux avec normes strictes.', img: 'assets/images/services/img_20.png' },
+    { num: '22', title: 'Garlic - Ail de Qualité', desc: 'Exportation d\'ail blanc et violet de haute qualité pour les marchés européens et mondiaux.', img: 'assets/images/services/img_21.png' },
+    { num: '23', title: 'Riz Basmati Premium', desc: 'Exportation de riz Basmati de qualité supérieure avec certification et traçabilité.', img: 'assets/images/services/img_22.png' },
+    { num: '24', title: 'Huiles Végétales', desc: 'Exportation d\'huile de maïs, d\'olive et de tournesol de qualité premium.', img: 'assets/images/services/img_23.png' },
+    { num: '25', title: 'Fruits Secs & Dattes', desc: 'Exportation de dattes Medjool, figues et fruits secs de première qualité.', img: 'assets/images/services/img_24.png' },
+    { num: '26', title: 'Épices & Aromates', desc: 'Exportation d\'épices sélectionnées : cumin, coriandre, curcuma, poivre et paprika.', img: 'assets/images/services/img_25.png' },
+    { num: '27', title: 'Agrumes & Fruits Frais', desc: 'Exportation d\'oranges, citrons, clémentines et fruits frais vers les marchés internationaux.', img: 'assets/images/services/img_26.png' }
   ];
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      if (typeof (window as any).designesiaInit === 'function') {
-        (window as any).designesiaInit();
-      }
-    }, 100);
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router,
+    private translationService: TranslationService  // ← Ajouter
+  ) {}
+
+  ngOnInit(): void {
+    // Ajouter init traduction
+    this.currentLang = this.translationService.currentLanguage;
+    this.sub = this.translationService.lang$.subscribe(code => {
+      this.currentLang = this.languages.find(l => l.code === code);
+    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.clickHandler = () => { this.langOpen = false; };
+      document.addEventListener('click', this.clickHandler);
+
+      this.navSubscription = this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.reinitMobileMenu();
+      });
+    }
   }
+  toggleLang(): void { this.langOpen = !this.langOpen; }
+  selectLang(code: LangCode): void {
+    this.translationService.loadLanguage(code);
+    this.langOpen = false;
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+    if (this.navSubscription) this.navSubscription.unsubscribe();
+    if (isPlatformBrowser(this.platformId) && this.clickHandler) {
+      document.removeEventListener('click', this.clickHandler);
+    }
+  }
+
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Scroll to top on navigation
+      window.scrollTo(0, 0);
+
+      setTimeout(() => {
+        if (typeof (window as any).designesiaInit === 'function') {
+          (window as any).designesiaInit();
+        }
+        this.reinitMobileMenu();
+      }, 300); // augmenter le délai
+    }
+  }
+
+
+  private reinitMobileMenu(): void {
+    // Ne PAS toucher menu-btn ici — géré dans app.component.ts
+    const extraWrap = document.getElementById('extra-wrap');
+    if (extraWrap) extraWrap.classList.remove('active');
+  }
+
 }
