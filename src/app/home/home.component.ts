@@ -149,14 +149,11 @@ import { TranslatePipe } from '../services/translation/translate.pipe';
 
                             <div class="de-flex-col header-col-mid">
                                 <ul id="mainmenu">
-                                    <li><a class="menu-item" href="#">{{ 'nav.home' | translate }}</a></li>
-                                    <li><a class="menu-item" href="#">{{ 'nav.services' | translate }}</a>
-                                        <ul>
-                                            <li><a href="#">Services 1</a></li>
-                                            <li><a href="#">Services 2</a></li>
-                                            <li><a href="#">Service Single</a></li>
-                                        </ul>
-                                    </li>
+                                  <!-- Au lieu de href="#", utilisez routerLink -->
+                                  <li><a class="menu-item" routerLink="/" routerLinkActive="active">{{ 'nav.home' | translate }}</a></li>
+                                  <li><a class="menu-item" routerLink="/services" routerLinkActive="active">{{ 'nav.services' | translate }}</a>
+
+                                  </li>
                                     <li><a class="menu-item" href="#">{{ 'nav.company' | translate }}</a>
                                         <ul>
                                             <li><a href="#">{{ 'nav.aboutUs' | translate }}</a></li>

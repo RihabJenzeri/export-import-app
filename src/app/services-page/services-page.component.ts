@@ -302,122 +302,155 @@ import { CommonModule } from '@angular/common';
     <!-- overlay content end -->
   `,
   styles: [`
-    /* ── PAGE HERO ── */
+    /* PAGE HERO AVEC ARRONDIS COMPLET */
     .page-hero-services {
       position: relative;
-      min-height: 350px;
+      min-height: 450px;
       display: flex;
       align-items: center;
-       background-size: cover;
-      background-position: center;
+      background: url(/assets/images/background/breadcrumb.webp) center/cover no-repeat;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      margin: 20px;
     }
+
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg,
-        rgba(248,92,0,0.80) 0%,
-        rgba(20,20,20,0.65) 100%);
+      background: linear-gradient(135deg, rgba(248, 92, 0, 0.88) 0%, rgba(0, 0, 0, 0.75) 100%);
     }
+
     .hero-content {
       position: relative;
       z-index: 2;
+      width: 100%;
+      padding: 60px 0;
     }
+
     .hero-title {
-      font-size: 52px;
+      font-size: 56px;
       font-weight: 800;
       margin-bottom: 16px;
       color: #fff;
+      letter-spacing: -0.02em;
     }
+
+    /* Breadcrumb */
     .breadcrumb {
       background: transparent;
       padding: 0;
-      margin: 0;
+      justify-content: center;
     }
-    .breadcrumb-item a { color: rgba(255,255,255,0.8); text-decoration: none; }
+    .breadcrumb-item a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 16px;
+    }
     .breadcrumb-item a:hover { color: #fff; }
-    .breadcrumb-item.active { color: #f85c00; }
+    .breadcrumb-item.active { color: #f85c00; font-weight: 600; }
     .breadcrumb-item + .breadcrumb-item::before {
-      content: "›";
+      content: "/";
       color: rgba(255,255,255,0.5);
-      font-size: 18px;
-      line-height: 1;
+      font-size: 16px;
+      padding: 0 8px;
     }
 
-    /* ── SERVICES SECTION ── */
-    .services-section { padding: 80px 0; }
+    /* ============================================
+       SERVICES CARDS - STYLE PROFESSIONNEL
+       ============================================ */
+    .services-section {
+      padding: 100px 0;
+      background: #f8f9fa;
+    }
 
-    /* ── SERVICE CARD ── */
     .srv-card {
-      border-radius: 6px;
+      display: flex;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-      min-height: 220px;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-    .srv-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fff;
+      height: 100%;
     }
 
-    /* Image side */
+    .srv-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
     .srv-img-wrap {
       position: relative;
       width: 45%;
-      flex-shrink: 0;
       overflow: hidden;
+      background: #0a0f18;
     }
+
     .srv-num {
       position: absolute;
-      top: 14px;
-      left: 16px;
-      z-index: 2;
-      font-size: 38px;
+      top: 20px;
+      left: 20px;
+      font-size: 42px;
       font-weight: 800;
-      color: rgba(255,255,255,0.30);
-      line-height: 1;
-      font-family: 'Manrope', sans-serif;
+      color: rgba(255, 255, 255, 0.2);
+      z-index: 2;
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: -0.03em;
     }
+
     .srv-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.65s cubic-bezier(.4,0,.2,1);
       display: block;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .srv-card:hover .srv-img { transform: scale(1.08); }
+
+    .srv-card:hover .srv-img {
+      transform: scale(1.1);
+    }
+
     .srv-img-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.20);
+      background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
     }
 
-    /* Text side */
     .srv-text-wrap {
       width: 55%;
-      background: #1a1a1a;
-      color: #fff;
-      padding: 28px 24px;
+      background: #1a2332;
+      padding: 32px 28px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
+
     .srv-title {
+      font-size: 22px;
       font-weight: 700;
-      margin-bottom: 10px;
-      font-size: 18px;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
     }
+
     .srv-title a {
-      color: #fff;
+      color: #ffffff;
       text-decoration: none;
-      transition: color .2s;
+      transition: color 0.25s ease;
+      font-family: 'Barlow', sans-serif;
     }
-    .srv-title a:hover { color: #f85c00; }
+
+    .srv-title a:hover {
+      color: #f85c00;
+    }
+
     .srv-desc {
-      color: rgba(255,255,255,0.68);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 14px;
-      line-height: 1.75;
-      margin: 0 0 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
     }
+
     .srv-link {
       color: #f85c00;
       font-size: 13px;
@@ -425,18 +458,67 @@ import { CommonModule } from '@angular/common';
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: gap .2s;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.25s ease;
     }
-    .srv-link:hover { gap: 10px; }
-    .srv-link i { font-size: 11px; }
 
-    /* Responsive */
+    .srv-link i {
+      font-size: 12px;
+      transition: transform 0.25s ease;
+    }
+
+    .srv-link:hover {
+      gap: 12px;
+      color: #ff8c42;
+    }
+
+    .srv-link:hover i {
+      transform: translateX(3px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .services-section { padding: 70px 0; }
+      .hero-title { font-size: 44px; }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero-services {
+        border-radius: 20px;
+        min-height: 300px;
+        margin: 15px;
+      }
+      .hero-title { font-size: 34px; }
+      .services-section { padding: 50px 0; }
+      .srv-title { font-size: 20px; }
+      .srv-text-wrap { padding: 24px 20px; }
+    }
+
     @media (max-width: 576px) {
+      .page-hero-services {
+        border-radius: 16px;
+        min-height: 240px;
+        margin: 10px;
+      }
+      .hero-title { font-size: 28px; }
       .srv-card { flex-direction: column; }
       .srv-img-wrap, .srv-text-wrap { width: 100%; }
-      .srv-img-wrap { min-height: 180px; }
-      .hero-title { font-size: 34px; }
+      .srv-img-wrap { min-height: 200px; }
+      .srv-text-wrap { padding: 20px; }
+      .srv-title { font-size: 18px; }
+      .srv-desc { font-size: 13px; }
+      .srv-num { font-size: 32px; top: 12px; left: 12px; }
+    }
+
+    @media (max-width: 400px) {
+      .page-hero-services {
+        border-radius: 12px;
+        margin: 8px;
+      }
+      .hero-title { font-size: 24px; }
+      .srv-img-wrap { min-height: 160px; }
     }
   `]
 })
@@ -444,62 +526,33 @@ export class ServicesPageComponent implements AfterViewInit {
   year = new Date().getFullYear();
 
   services = [
-    {
-      num: '01',
-      title: 'Trucking',
-      desc: 'Reliable ground transportation for shipments across the United States with flexible fleet options.',
-      img: 'assets/images/services/service-1.webp',
-      link: '/service-single'
-    },
-    {
-      num: '02',
-      title: 'Air Freight',
-      desc: 'Fast delivery of time-sensitive cargo using global air routes with real-time tracking.',
-      img: 'assets/images/services/service-2.webp',
-      link: '/service-single'
-    },
-    {
-      num: '03',
-      title: 'Ship Freight',
-      desc: 'Cost-effective shipping solution for bulk cargo with dependable international sea freight services.',
-      img: 'assets/images/services/service-3.webp',
-      link: '/service-single'
-    },
-    {
-      num: '04',
-      title: 'Rail Freight',
-      desc: 'Efficient and eco-friendly rail transport option ideal for long-distance heavy shipments.',
-      img: 'assets/images/services/service-4.webp',
-      link: '/service-single'
-    },
-    {
-      num: '05',
-      title: 'Warehousing',
-      desc: 'Secure storage with inventory management, order fulfillment, and nationwide distribution.',
-      img: 'assets/images/services/service-5.webp',
-      link: '/service-single'
-    },
-    {
-      num: '06',
-      title: 'Customs Brokerage',
-      desc: 'Expert assistance in navigating import/export regulations to ensure smooth customs clearance.',
-      img: 'assets/images/services/service-6.webp',
-      link: '/service-single'
-    },
-    {
-      num: '07',
-      title: 'Last-Mile Delivery',
-      desc: 'Reliable end-to-end delivery service ensuring shipments reach customers\'s doors quickly and safely.',
-      img: 'assets/images/services/service-7.webp',
-      link: '/service-single'
-    },
-    {
-      num: '08',
-      title: 'Project Cargo',
-      desc: 'Specialized transport for oversized, heavy, or complex cargo requiring tailored logistics planning.',
-      img: 'assets/images/services/service-8.webp',
-      link: '/service-single'
-    }
+    { num: '01', title: 'Transport Routier de Qualité', desc: 'Solutions de transport fiables pour vos marchandises à travers le monde avec une flotte flexible et moderne.', img: 'assets/images/services/img.png', link: '/service-single' },
+    { num: '02', title: 'Fret Aérien Express', desc: 'Livraison rapide de marchandises urgentes utilisant les routes aériennes mondiales avec suivi en temps réel.', img: 'assets/images/services/img_1.png', link: '/service-single' },
+    { num: '03', title: 'Fret Maritime International', desc: 'Solutions économiques pour le transport de marchandises en vrac avec des services maritimes internationaux fiables.', img: 'assets/images/services/img_2.png', link: '/service-single' },
+    { num: '04', title: 'Transport Ferroviaire Écologique', desc: 'Option de transport ferroviaire efficace et écologique idéale pour les expéditions longue distance.', img: 'assets/images/services/img_3.png', link: '/service-single' },
+    { num: '05', title: 'Entreposage Sécurisé', desc: 'Stockage sécurisé avec gestion des stocks, exécution des commandes et distribution nationale.', img: 'assets/images/services/img_4.png', link: '/service-single' },
+    { num: '06', title: 'Courtage en Douane', desc: 'Assistance experte pour naviguer dans les réglementations d\'import/export pour un dédouanement sans heurts.', img: 'assets/images/services/img_5.png', link: '/service-single' },
+    { num: '07', title: 'Livraison Dernier Kilomètre', desc: 'Service de livraison fiable de bout en bout garantissant que les colis arrivent rapidement et en sécurité.', img: 'assets/images/services/img_6.png', link: '/service-single' },
+    { num: '08', title: 'Projets de Transport Spécial', desc: 'Solutions de transport spécialisées pour les marchandises surdimensionnées, lourdes ou complexes.', img: 'assets/images/services/img_7.png', link: '/service-single' },
+    { num: '09', title: 'Livraison Express Urgente', desc: 'Service de livraison express rapide et fiable pour les expéditions urgentes avec suivi en temps réel.', img: 'assets/images/services/img_8.png', link: '/service-single' },
+    { num: '10', title: 'Chaîne du Froid', desc: 'Logistique à température contrôlée pour les denrées périssables, produits pharmaceutiques et articles sensibles.', img: 'assets/images/services/img_9.png', link: '/service-single' },
+    { num: '11', title: 'Logistique E-commerce', desc: 'Solution complète de traitement pour les entreprises en ligne incluant stockage, emballage et expédition.', img: 'assets/images/services/img_10.png', link: '/service-single' },
+    { num: '12', title: 'Transport de Charges Lourdes', desc: 'Transport spécialisé pour les équipements surdimensionnés et lourds avec permis et escortes.', img: 'assets/images/services/img_11.png', link: '/service-single' },
+    { num: '13', title: 'Transport Intermodal', desc: 'Solutions combinées rail et camion pour un coût et une efficacité optimaux.', img: 'assets/images/services/img_12.png', link: '/service-single' },
+    { num: '14', title: 'Transport Transfrontalier', desc: 'Services experts de dédouanement et d\'expédition transfrontalière entre pays.', img: 'assets/images/services/img_13.png', link: '/service-single' },
+    { num: '15', title: 'Emballage Professionnel', desc: 'Services d\'emballage et de caisse professionnels pour garantir l\'arrivée sécurisée de votre cargaison.', img: 'assets/images/services/img_14.png', link: '/service-single' },
+    { num: '16', title: 'Assurance Cargo', desc: 'Options complètes d\'assurance cargo pour protéger vos envois contre les dommages ou la perte.', img: 'assets/images/services/img_15.png', link: '/service-single' },
+    { num: '17', title: 'Gestion de Chaîne Logistique', desc: 'Services de gestion et d\'optimisation de chaîne logistique de bout en bout pour les entreprises.', img: 'assets/images/services/img_16.png', link: '/service-single' },
+    { num: '18', title: 'Logistique Inverse', desc: 'Gestion efficace des retours et solutions logistiques inversées pour le e-commerce et la vente au détail.', img: 'assets/images/services/img_17.png', link: '/service-single' },
+    { num: '19', title: 'Affrètement Maritime', desc: 'Services d\'affrètement professionnels avec un réseau de transporteurs mondiaux.', img: 'assets/images/services/img_18.png', link: '/service-single' },
+    { num: '20', title: 'Conseil en Logistique', desc: 'Conseil expert en logistique pour optimiser votre chaîne d\'approvisionnement et réduire les coûts.', img: 'assets/images/services/img_19.png', link: '/service-single' },
+    { num: '21', title: 'Onions - Export Premium', desc: 'Exportation d\'oignons de qualité supérieure vers les marchés internationaux avec normes strictes.', img: 'assets/images/services/img_20.png', link: '/service-single' },
+    { num: '22', title: 'Garlic - Ail de Qualité', desc: 'Exportation d\'ail blanc et violet de haute qualité pour les marchés européens et mondiaux.', img: 'assets/images/services/img_21.png', link: '/service-single' },
+    { num: '23', title: 'Riz Basmati Premium', desc: 'Exportation de riz Basmati de qualité supérieure avec certification et traçabilité.', img: 'assets/images/services/img_22.png', link: '/service-single' },
+    { num: '24', title: 'Huiles Végétales', desc: 'Exportation d\'huile de maïs, d\'olive et de tournesol de qualité premium.', img: 'assets/images/services/img_23.png', link: '/service-single' },
+    { num: '25', title: 'Fruits Secs & Dattes', desc: 'Exportation de dattes Medjool, figues et fruits secs de première qualité.', img: 'assets/images/services/img_24.png', link: '/service-single' },
+    { num: '26', title: 'Épices & Aromates', desc: 'Exportation d\'épices sélectionnées : cumin, coriandre, curcuma, poivre et paprika.', img: 'assets/images/services/img_25.png', link: '/service-single' },
+    { num: '27', title: 'Agrumes & Fruits Frais', desc: 'Exportation d\'oranges, citrons, clémentines et fruits frais vers les marchés internationaux.', img: 'assets/images/services/img_26.png', link: '/service-single' }
   ];
 
   ngAfterViewInit() {
